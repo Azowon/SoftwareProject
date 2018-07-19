@@ -10,6 +10,7 @@ public class Settings {
 	public static String passwordDatabaseUsername;
 	public static String passwordDatabasePassword;
 	public static String saltValue;
+	public static boolean isLoaded=false; //needs to be checked before using, if false call loadSettings()
 	
 	public static void loadSettings() throws SettingsFileNotExistingException
 	{
@@ -51,6 +52,7 @@ public class Settings {
 		    	
 		        line = br.readLine();
 		    }
+		    isLoaded=true;
 		}
 		catch(IOException e)
 		{

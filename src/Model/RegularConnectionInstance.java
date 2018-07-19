@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import Util.Logger;
 import Util.Settings;
+import Util.SettingsFileNotExistingException;
 
 /**
  * Database Connection Instance
@@ -16,6 +17,14 @@ public class RegularConnectionInstance implements IConnectionInstance{
 	private Connection databaseConnection;
 	
 	public RegularConnectionInstance(){
+		if(!Settings.isLoaded) 
+		{
+			try {
+				Settings.loadSettings();
+			} catch (SettingsFileNotExistingException e) {
+				Logger.log(e.getMessage());
+			}
+		}
 		try
 		{
 			Class.forName("org.postgresql.Driver");

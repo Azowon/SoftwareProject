@@ -8,6 +8,14 @@ public class Utilities {
 	
 	public static String createHash(String password)
 	{
+		if(!Settings.isLoaded) 
+		{
+			try {
+				Settings.loadSettings();
+			} catch (SettingsFileNotExistingException e) {
+				Logger.log(e.getMessage());
+			}
+		}
 		String res="";
 		String saltedPassword=password+Settings.saltValue;
 		try 
