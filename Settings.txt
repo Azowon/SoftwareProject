@@ -1,0 +1,7 @@
+regularDatabaseName=jdbc:postgresql://localhost/sw_project
+regularDatabasePassword=postgres
+regularDatabaseUsername=postgres
+passwordDatabaseName=jdbc:postgresql://localhost/db_auth
+passwordDatabaseUsername=postgres
+passwordDatabasePassword=postgres
+saltValue=D2Nzf4Eqi
