@@ -5,6 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import Util.Logger;
+import Util.Utilities;
+
 /**
  * Creates and executes SQL statements
  * @author Raphael Albiez
@@ -26,7 +29,7 @@ public class StatementCreator {
 		List<User> users=new ArrayList<User>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users");
+			ResultSet res=StatementExecutor.execute("SELECT * FROM users","Regular");
 			
 			while(res.next())
 			{
@@ -43,7 +46,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return users;
 	}
@@ -58,7 +61,7 @@ public class StatementCreator {
 		List<User> users=new ArrayList<User>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users_in_task, users WHERE users_in_task.user_id= users.user_id AND task_id="+taskId);
+			ResultSet res=StatementExecutor.execute("SELECT * FROM users_in_task, users WHERE users_in_task.user_id= users.user_id AND task_id="+taskId,"Regular");
 			
 			while(res.next())
 			{
@@ -75,7 +78,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return users;
 	}
@@ -90,7 +93,7 @@ public class StatementCreator {
 		List<User> users=new ArrayList<User>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users WHERE "+condition);
+			ResultSet res=StatementExecutor.execute("SELECT * FROM users WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
@@ -107,7 +110,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return users;
 	}
@@ -123,11 +126,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		
 	}
@@ -143,11 +146,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -159,11 +162,11 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM users WHERE user_id="+u.getId());
+			StatementExecutor.execute("DELETE FROM users WHERE user_id="+u.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 
@@ -176,7 +179,7 @@ public class StatementCreator {
 		List<Project> projects=new ArrayList<Project>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM project");
+			ResultSet res=StatementExecutor.execute("SELECT * FROM project","Regular");
 			
 			while(res.next())
 			{
@@ -190,7 +193,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return projects;
 	}
@@ -205,7 +208,7 @@ public class StatementCreator {
 		List<Project> projects=new ArrayList<Project>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM project WHERE "+condition);
+			ResultSet res=StatementExecutor.execute("SELECT * FROM project WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
@@ -219,7 +222,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return projects;
 	}
@@ -234,11 +237,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -252,11 +255,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -268,11 +271,12 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE project_id="+p.getId());
+			StatementExecutor.execute("DELETE FROM project WHERE project_id="+p.getId(),"Regular");
+			this.deleteTPoint(p.getId());
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -285,7 +289,7 @@ public class StatementCreator {
 		List<Workpackage> workpackages=new ArrayList<Workpackage>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM workpackage");
+			ResultSet res=StatementExecutor.execute("SELECT * FROM workpackage","Regular");
 			
 			while(res.next())
 			{
@@ -300,7 +304,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return workpackages;
 	}
@@ -315,7 +319,7 @@ public class StatementCreator {
 		List<Workpackage> workpackages=new ArrayList<Workpackage>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM workpackage WHERE "+condition);
+			ResultSet res=StatementExecutor.execute("SELECT * FROM workpackage WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
@@ -330,7 +334,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return workpackages;
 	}
@@ -346,11 +350,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -365,11 +369,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -381,11 +385,11 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE workpackage_id="+w.getId());
+			StatementExecutor.execute("DELETE FROM project WHERE workpackage_id="+w.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -398,7 +402,7 @@ public class StatementCreator {
 		List<Task> tasks=new ArrayList<Task>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM task");
+			ResultSet res=StatementExecutor.execute("SELECT * FROM task","Regular");
 			
 			while(res.next())
 			{
@@ -417,7 +421,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return tasks;
 	}
@@ -432,7 +436,7 @@ public class StatementCreator {
 		List<Task> tasks=new ArrayList<Task>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users in_task, task WHERE users_in_task.task_id=task.task_id AND users_in_task.user_id="+userId);
+			ResultSet res=StatementExecutor.execute("SELECT * FROM users in_task, task WHERE users_in_task.task_id=task.task_id AND users_in_task.user_id="+userId,"Regular");
 			
 			while(res.next())
 			{
@@ -451,7 +455,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return tasks;
 	}
@@ -466,7 +470,7 @@ public class StatementCreator {
 		List<Task> tasks=new ArrayList<Task>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM task WHERE "+condition);
+			ResultSet res=StatementExecutor.execute("SELECT * FROM task WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
@@ -485,7 +489,7 @@ public class StatementCreator {
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		return tasks;
 	}
@@ -501,11 +505,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -522,11 +526,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -538,11 +542,11 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE task_id="+t.getId());
+			StatementExecutor.execute("DELETE FROM project WHERE task_id="+t.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -557,13 +561,13 @@ public class StatementCreator {
 		String s="";
 		try
 		{
-			ResultSet res=StatementExecutor.execute("SELECT role FROM user_in_project WHERE user_id="+userId+" AND project_id="+projectId);
+			ResultSet res=StatementExecutor.execute("SELECT role FROM user_in_project WHERE user_id="+userId+" AND project_id="+projectId,"Regular");
 			res.next();
 			s=res.getString("role");
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		
 		return s; 
@@ -581,11 +585,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -601,11 +605,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -618,11 +622,11 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE user_id="+userId+" AND project_id="+projectId);
+			StatementExecutor.execute("DELETE FROM project WHERE user_id="+userId+" AND project_id="+projectId,"Regular");
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -636,13 +640,13 @@ public class StatementCreator {
 		String s="";
 		try
 		{
-			ResultSet res=StatementExecutor.execute("SELECT tpoint FROM heatmap WHERE project_id="+projectId);
+			ResultSet res=StatementExecutor.execute("SELECT tpoint FROM heatmap WHERE project_id="+projectId,"Regular");
 			res.next();
 			s=res.getString("tpoint");
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 		
 		return s; 
@@ -659,11 +663,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -678,11 +682,11 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement);
+			StatementExecutor.execute(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
@@ -694,13 +698,45 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM heatmap WHERE project_id="+projectId);
+			StatementExecutor.execute("DELETE FROM heatmap WHERE project_id="+projectId,"Regular");
 		}
 		catch (SQLException e) 
 		{
-			System.out.println(e.getMessage());
+			Logger.log(e.getMessage());
 		}
 	}
 	
+	public boolean checkPassword(String username, String password)
+	{
+		String s="";
+		try
+		{
+			ResultSet res=StatementExecutor.execute("SELECT password FROM authentication WHERE username='"+username+"'","Password");
+			res.next();
+			s=res.getString("password");
+		}
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+		
+		String pwHash=Utilities.createHash(password);
+		
+		return s.equals(pwHash); 
+	}
+	
+	public void savePassword(String username, String password)
+	{
+		String pwHash=Utilities.createHash(password);
+		
+		try 
+		{
+			StatementExecutor.execute("INSERT INTO authentication VALUES (\'"+username+"\',\'"+pwHash+"\')","Password");
+		} 
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+	}
 	
 }
