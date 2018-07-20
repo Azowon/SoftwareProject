@@ -271,8 +271,13 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE project_id="+p.getId(),"Regular");
+			
 			this.deleteTPoint(p.getId());
+			List<Workpackage> workpackages=this.selectWorkpackageWhere("project_id="+p.getId());
+			for(Workpackage w : workpackages) {
+				this.deleteWorkpackage(w);
+			}
+			StatementExecutor.execute("DELETE FROM project WHERE project_id="+p.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -384,7 +389,12 @@ public class StatementCreator {
 	public void deleteWorkpackage(Workpackage w)
 	{
 		try
-		{
+		{			
+			List<Task> tasks=this.selectTaskWhere("workpackage_id="+w.getId());
+			for(Task t : tasks)
+			{
+				this.deleteTask(t);
+			}
 			StatementExecutor.execute("DELETE FROM workpackage WHERE workpackage_id="+w.getId(),"Regular");
 		}
 		catch (SQLException e) 
@@ -542,7 +552,8 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM task WHERE task_id="+t.getId(),"Regular");
+			StatementExecutor.execute("DELET FROM users_in_taks WHERE task_id="+t.getId(), "Regular");
+			StatementExecutor.execute("DELETE FROM task WHERE task_id="+t.getId(),"Regular");		
 		}
 		catch (SQLException e) 
 		{
