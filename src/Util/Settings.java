@@ -1,6 +1,8 @@
 package Util;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Settings {
 	public static String regularDatabaseName;
@@ -14,7 +16,10 @@ public class Settings {
 	
 	public static void loadSettings() throws SettingsFileNotExistingException
 	{
-		File f=new File("/Settings.txt");
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		
+		File f=new File(s+"\\Settings.txt");
 		
 		if(!f.exists()) throw new SettingsFileNotExistingException();
 		

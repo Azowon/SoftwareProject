@@ -385,7 +385,7 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE workpackage_id="+w.getId(),"Regular");
+			StatementExecutor.execute("DELETE FROM workpackage WHERE workpackage_id="+w.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -542,7 +542,7 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE task_id="+t.getId(),"Regular");
+			StatementExecutor.execute("DELETE FROM task WHERE task_id="+t.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -737,6 +737,76 @@ public class StatementCreator {
 		{
 			Logger.log(e.getMessage());
 		}
+	}
+	
+	public double selectTimeBookedForWorkpackage(long workpackageId)
+	{
+		String statement="SELECT sum(time_booked) as sum from task WHERE workpackage_id="+workpackageId;
+		
+		try 
+		{
+			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			res.next();
+			return res.getDouble("sum");
+		} 
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+		return 0;
+	}
+	
+	public double selectTimeBookedForProject(long projectId)
+	{
+		String statement="SELECT sum("
+				+ "(SELECT sum(time_booked) as sum from task WHERE workpackage_id=workpackage.workpackage_id)"
+				+ ") from workpackage where project_id="+projectId;
+		try 
+		{
+			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			res.next();
+			return res.getDouble("sum");
+		} 
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+		return 0;
+	}
+	
+	public double selectTimePlannedForWorkpackage(long workpackageId)
+	{
+		String statement="SELECT sum(time_planned) as sum from task WHERE workpackage_id="+workpackageId;
+		
+		try 
+		{
+			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			res.next();
+			return res.getDouble("sum");
+		} 
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+		return 0;
+	}
+	
+	public double selectTimePlannedForProject(long projectId)
+	{
+		String statement="SELECT sum("
+				+ "(SELECT sum(time_planned) as sum from task WHERE workpackage_id=workpackage.workpackage_id)"
+				+ ") from workpackage where project_id="+projectId;
+		try 
+		{
+			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			res.next();
+			return res.getDouble("sum");
+		} 
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+		return 0;
 	}
 	
 }

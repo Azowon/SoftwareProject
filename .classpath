@@ -5,5 +5,30 @@
 	<classpathentry kind="lib" path="C:/Program Files (x86)/PostgreSQL/pgJDBC/postgresql-42.2.1.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/PostgreSQL/pgJDBC/postgresql-42.2.1.jre6.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files (x86)/PostgreSQL/pgJDBC/postgresql-42.2.1.jre7.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/catalina-storeconfig.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/ecj-4.6.3.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/jaspic-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-jni.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-util-scan.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/apache-tomcat-9.0.6/lib/websocket-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
