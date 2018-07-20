@@ -4,6 +4,11 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * Holds application settings
+ * @author Raphael Albiez
+ *
+ */
 public class Settings {
 	public static String regularDatabaseName;
 	public static String regularDatabaseUsername;
@@ -14,6 +19,10 @@ public class Settings {
 	public static String saltValue;
 	public static boolean isLoaded=false; //needs to be checked before using, if false call loadSettings()
 	
+	/**
+	 * Loads settings from setting file
+	 * @throws SettingsFileNotExistingException
+	 */
 	public static void loadSettings() throws SettingsFileNotExistingException
 	{
 		Path currentRelativePath = Paths.get("");

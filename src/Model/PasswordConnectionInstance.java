@@ -8,10 +8,18 @@ import Util.Logger;
 import Util.Settings;
 import Util.SettingsFileNotExistingException;
 
+/**
+ * Database Connection Instance
+ * @author Raphael Albiez
+ *
+ */
 public class PasswordConnectionInstance implements IConnectionInstance {
 
 	private Connection databaseConnection;
 	
+	/**
+	 * Defines new connection with parameters from settings file
+	 */
 	public PasswordConnectionInstance(){
 		if(!Settings.isLoaded) 
 		{
@@ -41,11 +49,18 @@ public class PasswordConnectionInstance implements IConnectionInstance {
 		}
 	}
 	
-
+	/**
+	 * Returns database connection
+	 * @return Connection
+	 */
 	public Connection getDatabaseConnection() {
 		return databaseConnection;
 	}
 
+	/**
+	 * Sets database connection
+	 * @param databaseConnection Connection
+	 */
 	private void setDatabaseConnection(Connection databaseConnection) {
 		this.databaseConnection = databaseConnection;
 	}

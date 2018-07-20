@@ -1,5 +1,10 @@
 package Util;
 
+/**
+ * Execption thrown if settings file is missing
+ * @author Raphael Albiez
+ *
+ */
 public class SettingsFileNotExistingException extends Exception{
 
 	/**

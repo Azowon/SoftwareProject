@@ -16,6 +16,9 @@ public class RegularConnectionInstance implements IConnectionInstance{
 	
 	private Connection databaseConnection;
 	
+	/**
+	 * Defines new connection with parameters from settings file
+	 */
 	public RegularConnectionInstance(){
 		if(!Settings.isLoaded) 
 		{
@@ -45,11 +48,18 @@ public class RegularConnectionInstance implements IConnectionInstance{
 		}
 	}
 	
-
+	/**
+	 * Returns database connection
+	 * @return Connection
+	 */
 	public Connection getDatabaseConnection() {
 		return databaseConnection;
 	}
 
+	/**
+	 * Sets database connection
+	 * @param databaseConnection Connection
+	 */
 	private void setDatabaseConnection(Connection databaseConnection) {
 		this.databaseConnection = databaseConnection;
 	}

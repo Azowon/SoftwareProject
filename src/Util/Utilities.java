@@ -4,8 +4,18 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Class for utility methods
+ * @author Raphael Albiez
+ *
+ */
 public class Utilities {
 	
+	/**
+	 * Creates SHA-256 Hash from password and salt value
+	 * @param password Password
+	 * @return Hashed Password
+	 */
 	public static String createHash(String password)
 	{
 		if(!Settings.isLoaded) 
@@ -33,6 +43,11 @@ public class Utilities {
 		
 	}
 	
+	/**
+	 * Transforms byte representation of hash to hex representation
+	 * @param hash byte representation
+	 * @return hex representation
+	 */
 	private static String bytesToHex(byte[] hash) {
 	    StringBuffer hexString = new StringBuffer();
 	    for (int i = 0; i < hash.length; i++) {

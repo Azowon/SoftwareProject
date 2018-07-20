@@ -162,7 +162,10 @@ public class StatementCreator {
 	{
 		try
 		{
-			//TODO Delete user role in project delete user role in task delete assigned user tasks
+			StatementExecutor.executeUpdate("DELETE FROM authentication WHERE username=\'"+u.getUsername()+"\'", "Password");
+			StatementExecutor.executeUpdate("DELETE FROM users_in_task WHERE user_id="+u.getId(), "Regular");
+			StatementExecutor.executeUpdate("UPDATE task SET assigned_user_id=1 where assigned_user_id="+u.getId(), "Regular");
+			this.deleteUserRoleInProject(u.getId(), -1);
 			StatementExecutor.executeUpdate("DELETE FROM users WHERE user_id="+u.getId(),"Regular");
 		}
 		catch (SQLException e) 
@@ -272,7 +275,7 @@ public class StatementCreator {
 	{
 		try
 		{
-			
+			this.deleteUserRoleInProject(-1, p.getId());
 			this.deleteTPoint(p.getId());
 			List<Workpackage> workpackages=this.selectWorkpackageWhere("project_id="+p.getId());
 			for(Workpackage w : workpackages) {
@@ -634,7 +637,7 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.executeUpdate("DELETE FROM project WHERE user_id="+userId+" AND project_id="+projectId,"Regular");
+			StatementExecutor.executeUpdate("DELETE FROM project WHERE user_id="+userId+" OR project_id="+projectId,"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -718,6 +721,12 @@ public class StatementCreator {
 		}
 	}
 	
+	/**
+	 * Performs password check for user
+	 * @param username User 
+	 * @param password Password
+	 * @return result of password check
+	 */
 	public boolean checkPassword(String username, String password)
 	{
 		String s="";
@@ -737,6 +746,11 @@ public class StatementCreator {
 		return s.equals(pwHash); 
 	}
 	
+	/**
+	 * Saves password for user to password database
+	 * @param username User
+	 * @param password Password
+	 */
 	public void savePassword(String username, String password)
 	{
 		String pwHash=Utilities.createHash(password);
@@ -751,6 +765,11 @@ public class StatementCreator {
 		}
 	}
 	
+	/**
+	 * sums up time booked for workpackage
+	 * @param workpackageId Workpackage Id
+	 * @return sum of time booked
+	 */
 	public double selectTimeBookedForWorkpackage(long workpackageId)
 	{
 		String statement="SELECT sum(time_booked) as sum from task WHERE workpackage_id="+workpackageId;
@@ -768,6 +787,11 @@ public class StatementCreator {
 		return 0;
 	}
 	
+	/**
+	 * sums up time booked for project
+	 * @param projectId Project Id
+	 * @return sum of time booked
+	 */
 	public double selectTimeBookedForProject(long projectId)
 	{
 		String statement="SELECT sum("
@@ -786,6 +810,11 @@ public class StatementCreator {
 		return 0;
 	}
 	
+	/**
+	 * sums up time planned for workpackage
+	 * @param workpackageId Workpackage Id
+	 * @return sum of time planned
+	 */
 	public double selectTimePlannedForWorkpackage(long workpackageId)
 	{
 		String statement="SELECT sum(time_planned) as sum from task WHERE workpackage_id="+workpackageId;
@@ -803,6 +832,11 @@ public class StatementCreator {
 		return 0;
 	}
 	
+	/**
+	 * sums up time planned for project
+	 * @param projectId Project Id
+	 * @return sum of time planned
+	 */
 	public double selectTimePlannedForProject(long projectId)
 	{
 		String statement="SELECT sum("
