@@ -1,4 +1,4 @@
-package servlet.contentobjects;
+package View.servlet.contentobjects;
 
 public class MyTasksObject {
 	private String myTasks = "";

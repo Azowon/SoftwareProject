@@ -7,7 +7,7 @@
     </head>
     <body>
         <div id="logindiv">
-            <form type="submit" action="/sw_proj/testServlet" method="post">
+            <form type="submit" action="/SoftwareProject/indexServlet" method="post">
                 <table id="loginbox">
                     <tr>
                         <td id="formtext">Login:</td>

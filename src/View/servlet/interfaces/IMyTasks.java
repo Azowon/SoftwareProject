@@ -1,4 +1,4 @@
-package servlet.interfaces;
+package View.servlet.interfaces;
 
 public interface IMyTasks {	
 	public void setMyTasks();

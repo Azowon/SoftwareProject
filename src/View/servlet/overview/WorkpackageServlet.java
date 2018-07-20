@@ -1,4 +1,4 @@
-package servlet;
+package View.servlet.overview;
 
 import java.io.IOException;
 
@@ -9,29 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servlet.contentobjects.MyTasksObject;
-import servlet.contentobjects.NavigationBarObject;
-import servlet.contentobjects.ServletHelper;
-import servlet.contentobjects.TaskObject;
-import servlet.interfaces.IMyTasks;
-import servlet.interfaces.INavigationBar;
+import View.servlet.contentobjects.MyTasksObject;
+import View.servlet.contentobjects.NavigationBarObject;
+import View.servlet.contentobjects.ServletHelper;
+import View.servlet.contentobjects.WorkpackageObject;
+import View.servlet.interfaces.IMyTasks;
+import View.servlet.interfaces.INavigationBar;
+
 
 /**
- * Servlet implementation class TaskServlet
+ * Servlet implementation class WorkpackageServlet
  */
-@WebServlet("/TaskServlet")
-public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks {
+@WebServlet("/WorkpackageServlet")
+public class WorkpackageServlet extends HttpServlet implements INavigationBar, IMyTasks{
 	private static final long serialVersionUID = 1L;
     private ServletHelper sh;
     private NavigationBarObject nbo;
     private MyTasksObject mto;
-    private TaskObject t;
+    private WorkpackageObject wp;
 	HttpServletRequest req;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TaskServlet() {
+    public WorkpackageServlet() {
         super();
     }
 
@@ -42,25 +43,25 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 		req = request;
 		configureJSP(request, response);
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/Task.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/Workpackage.jsp");
 		view.forward(request, response);
 	}
-	
+
 	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks();
-//      t = sh.getWorkpackage((request.getAttribute("taskname")).toString());
+//      wp = sh.getWorkpackage((request.getAttribute("workpackagename")).toString());
         
         // TO DO: NAME VOM WORKPACKAGE UEBER REQUEST ATTRIBUT
         
-        t = sh.getTask("Task TEST");
+        wp = sh.getWorkpackage("Workpackage TEST");
         
 		setMyTasks();
 		setNavigationBar();
-		setTask();
+		setWorkpackage();
 	}
-	
+
 	@Override
 	public void setMyTasks() {
 		String myTasks = mto.getMyTasks();
@@ -77,33 +78,29 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 		req.setAttribute("logo", logo);
 	}
 	
-	private void setTask() {
-		String name = t.getName();
-		String nameLink = t.getNameLink();
-		String pNameLink = t.getProjectNameLink();
-		String wpNameLink = t.getWorkpackageNameLink();
-		String deadline = t.getDeadline();
-		String desc = t.getDescription();
-		String time = t.getTime();
-		String status = t.getStatus();
-		String au = t.getAssignedUser();
+	private void setWorkpackage() {
+		String name = wp.getName();
+		String nameLink = wp.getNameLink();
+		String pNameLink = wp.getProjectNameLink();
+		String deadline = wp.getDeadline();
+		String desc = wp.getDescription();
+		String time = wp.getTime();
+		String tasks = wp.getTasks();
 		
 		req.setAttribute("Name", name);
-		req.setAttribute("tasklink", nameLink);
+		req.setAttribute("workpackagelink", nameLink);
 		req.setAttribute("projectlink", pNameLink);
-		req.setAttribute("workpackagelink", wpNameLink);
 		req.setAttribute("deadline", deadline);
 		req.setAttribute("description", desc);
 		req.setAttribute("time", time);
-		req.setAttribute("status", status);
-		req.setAttribute("assigneduser", au);
+		req.setAttribute("tasks", tasks);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

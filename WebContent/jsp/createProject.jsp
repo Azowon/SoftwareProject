@@ -26,13 +26,28 @@
             </div>
         </div>
         <div class="content">
-            <div id="feed">
-            	${feed}
-            </div>
-            <div id="my-tasks">
-                <table>
-					${mytasks}
-                </table>
+            <div class="create-model">
+                <h1>Create new Project</h1>
+                <form action="${pageContext.request.contextPath}/CreateProjectServlet" method="get">
+                    <table class="create-table">
+                        <tr>
+                            <td>Project Name:</td>
+                            <td><input type="text" name="project-name"/></td>
+                        </tr>
+                        <tr>
+                            <td>Deadline:</td>
+                            <td><input type="date" name="project-deadline"/></td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td><textarea rows="5" cols="50" name="project-description"></textarea></td>
+                        </tr>
+                    </table>
+                    <button type="submit" class="create-button">Create</button>
+                </form>
+                <form action="${pageContext.request.contextPath}/indexServlet">
+                	<button class="cancel-button">Cancel</button>
+            	</form>
             </div>
         </div>
     </body>

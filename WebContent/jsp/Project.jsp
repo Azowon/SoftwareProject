@@ -8,7 +8,7 @@
     <body>
         <div id="navigationbar">
             <div id="logodiv">
-                <form action="/sw_proj/indexServlet" method="post">
+                <form action="/SoftwareProject/indexServlet" method="post">
                     <input type='image' src='${pageContext.request.contextPath}${logo}'/>
                 </form>
             </div>

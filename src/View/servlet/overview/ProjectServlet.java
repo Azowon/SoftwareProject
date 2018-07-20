@@ -1,4 +1,4 @@
-package servlet;
+package View.servlet.overview;
 
 import java.io.IOException;
 
@@ -9,29 +9,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servlet.contentobjects.MyTasksObject;
-import servlet.contentobjects.NavigationBarObject;
-import servlet.contentobjects.ServletHelper;
-import servlet.contentobjects.WorkpackageObject;
-import servlet.interfaces.IMyTasks;
-import servlet.interfaces.INavigationBar;
+import View.servlet.contentobjects.MyTasksObject;
+import View.servlet.contentobjects.NavigationBarObject;
+import View.servlet.contentobjects.ProjectObject;
+import View.servlet.contentobjects.ServletHelper;
+import View.servlet.interfaces.IMyTasks;
+import View.servlet.interfaces.INavigationBar;
+
+
 
 /**
- * Servlet implementation class WorkpackageServlet
+ * Servlet implementation class ProjectServlet
  */
-@WebServlet("/WorkpackageServlet")
-public class WorkpackageServlet extends HttpServlet implements INavigationBar, IMyTasks{
+@WebServlet("/ProjectServlet")
+public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTasks {
 	private static final long serialVersionUID = 1L;
     private ServletHelper sh;
     private NavigationBarObject nbo;
     private MyTasksObject mto;
-    private WorkpackageObject wp;
+    private ProjectObject po;
 	HttpServletRequest req;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public WorkpackageServlet() {
+    public ProjectServlet() {
         super();
     }
 
@@ -42,23 +44,23 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		req = request;
 		configureJSP(request, response);
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/Workpackage.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/Project.jsp");
 		view.forward(request, response);
 	}
-
+	
 	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks();
-//      wp = sh.getWorkpackage((request.getAttribute("workpackagename")).toString());
+//      po = sh.getProject((request.getAttribute("projectName")).toString());
         
-        // TO DO: NAME VOM WORKPACKAGE UEBER REQUEST ATTRIBUT
+        // TO DO: NAME VOM PROJECT UEBER REQUEST ATTRIBUT
         
-        wp = sh.getWorkpackage("Workpackage TEST");
+        po = sh.getProject("Project TEST");
         
 		setMyTasks();
 		setNavigationBar();
-		setWorkpackage();
+		setProject();
 	}
 
 	@Override
@@ -76,25 +78,23 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		req.setAttribute("projectcontent", projectContent);
 		req.setAttribute("logo", logo);
 	}
-	
-	private void setWorkpackage() {
-		String name = wp.getName();
-		String nameLink = wp.getNameLink();
-		String pNameLink = wp.getProjectNameLink();
-		String deadline = wp.getDeadline();
-		String desc = wp.getDescription();
-		String time = wp.getTime();
-		String tasks = wp.getTasks();
+
+	private void setProject() {
+		String name = po.getName();
+		String nameLink = po.getNameLink();
+		String deadline = po.getDeadline();
+		String desc = po.getDescription();
+		String time = po.getTime();
+		String wps = po.getWorkpackages();
 		
-		req.setAttribute("Name", name);
-		req.setAttribute("workpackagelink", nameLink);
-		req.setAttribute("projectlink", pNameLink);
+		req.setAttribute("name", name);
+		req.setAttribute("namelink", nameLink);
 		req.setAttribute("deadline", deadline);
 		req.setAttribute("description", desc);
 		req.setAttribute("time", time);
-		req.setAttribute("tasks", tasks);
+		req.setAttribute("workpackages", wps);
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

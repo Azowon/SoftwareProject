@@ -1,4 +1,4 @@
-package servlet.contentobjects;
+package View.servlet.contentobjects;
 
 public class TaskObject {
 	private String name;
@@ -25,7 +25,7 @@ public class TaskObject {
 	}
 	
 	public void setNameLink(String nameLink) {
-		this.nameLink = "<a href='/sw_proj/TaskServlet'>" + nameLink + "</a>";
+		this.nameLink = "<a href='/SoftwareProject/TaskServlet'>" + nameLink + "</a>";
 	}
 	
 	public String getProjectNameLink() {
@@ -33,7 +33,7 @@ public class TaskObject {
 	}
 	
 	public void setProjectNameLink(String projectNameLink) {
-		this.projectNameLink = "<a href='/sw_proj/ProjectServlet'>" + projectNameLink + "</a>";
+		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet'>" + projectNameLink + "</a>";
 	}
 	
 	public String getWorkpackageNameLink() {
@@ -41,7 +41,7 @@ public class TaskObject {
 	}
 	
 	public void setWorkpackageNameLink(String workpackageNameLink) {
-		this.workpackageNameLink = "<a href='/sw_proj/WorkpackageServlet'>" + workpackageNameLink + "</a>";
+		this.workpackageNameLink = "<a href='/SoftwareProject/WorkpackageServlet'>" + workpackageNameLink + "</a>";
 	}
 	
 	public String getDeadline() {

@@ -1,4 +1,4 @@
-package servlet;
+package View.servlet.create;
 
 import java.io.IOException;
 
@@ -9,27 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servlet.contentobjects.MyTasksObject;
-import servlet.contentobjects.NavigationBarObject;
-import servlet.contentobjects.ServletHelper;
-import servlet.interfaces.IMyTasks;
-import servlet.interfaces.INavigationBar;
+import View.servlet.contentobjects.NavigationBarObject;
+import View.servlet.contentobjects.ServletHelper;
+import View.servlet.interfaces.INavigationBar;
 
 /**
- * Servlet implementation class indexServlet
+ * Servlet implementation class CreateProjectFormServlet
  */
-@WebServlet("/indexServlet")
-public class indexServlet extends HttpServlet implements INavigationBar, IMyTasks {
+@WebServlet("/CreateProjectFormServlet")
+public class CreateProjectFormServlet extends HttpServlet implements INavigationBar {
 	private static final long serialVersionUID = 1L;
     private ServletHelper sh;
     private NavigationBarObject nbo;
-    private MyTasksObject mto;
 	HttpServletRequest req;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public indexServlet() {
+    public CreateProjectFormServlet() {
         super();
     }
 
@@ -40,19 +37,16 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 		req = request;
 		configureJSP();
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/index.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/createProject.jsp");
 		view.forward(req, response);
 	}
 	
 	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
-        mto = sh.getMyTasks();
-        
-		setTitle();
-		setFeed();
-		setNavigationBar();
-		setMyTasks();
+		
+        setTitle();
+        setNavigationBar();
 	}
 	
 	public void setTitle() {
@@ -69,23 +63,11 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 		req.setAttribute("logo", logo);
 	}
 
-	@Override
-	public void setMyTasks() {
-		String myTasks = mto.getMyTasks();
-		
-		req.setAttribute("mytasks", myTasks);
-	}
-	
-	private void setFeed() {
-		String feed = "Hello World";
-		req.setAttribute("feed", feed);
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

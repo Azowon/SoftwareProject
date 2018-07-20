@@ -1,4 +1,4 @@
-package servlet.contentobjects;
+package View.servlet.contentobjects;
 
 public class WorkpackageObject {
 	private String name;
@@ -23,7 +23,7 @@ public class WorkpackageObject {
 	}
 	
 	public void setNameLink(String nameLink) {
-		this.nameLink = "<a href='/sw_proj/WorkpackageServlet'>" + nameLink + "</a>";
+		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet'>" + nameLink + "</a>";
 	}
 	
 	public String getProjectNameLink() {
@@ -31,7 +31,7 @@ public class WorkpackageObject {
 	}
 	
 	public void setProjectNameLink(String projectNameLink) {
-		this.projectNameLink = "<a href='/sw_proj/ProjectServlet'>" + projectNameLink + "</a>";
+		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet'>" + projectNameLink + "</a>";
 	}
 	
 	public String getDescription() {

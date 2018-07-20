@@ -1,4 +1,4 @@
-package servlet.contentobjects;
+package View.servlet.contentobjects;
 
 public class NavigationBarObject {
 	private String LOGO_PATH = "";

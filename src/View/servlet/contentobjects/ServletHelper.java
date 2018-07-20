@@ -1,4 +1,4 @@
-package servlet.contentobjects;
+package View.servlet.contentobjects;
 
 public class ServletHelper {
 	
@@ -11,7 +11,7 @@ public class ServletHelper {
 		// TO DO: DATENBANKABFRAGE ALLER NAMEN VON EXISTIERENDEN PROJEKTEN
 		
 		NavigationBarObject nbo = new NavigationBarObject();
-		nbo.addProjectContent("/sw_proj/ProjectServlet", "Project TEST");
+		nbo.addProjectContent("/SoftwareProject/ProjectServlet", "Project TEST");
 		return nbo;
 	}
 	

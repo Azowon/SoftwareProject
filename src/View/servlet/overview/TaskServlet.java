@@ -1,4 +1,4 @@
-package servlet;
+package View.servlet.overview;
 
 import java.io.IOException;
 
@@ -9,29 +9,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servlet.contentobjects.MyTasksObject;
-import servlet.contentobjects.NavigationBarObject;
-import servlet.contentobjects.ProjectObject;
-import servlet.contentobjects.ServletHelper;
-import servlet.interfaces.IMyTasks;
-import servlet.interfaces.INavigationBar;
+import View.servlet.contentobjects.MyTasksObject;
+import View.servlet.contentobjects.NavigationBarObject;
+import View.servlet.contentobjects.ServletHelper;
+import View.servlet.contentobjects.TaskObject;
+import View.servlet.interfaces.IMyTasks;
+import View.servlet.interfaces.INavigationBar;
+
+
 
 /**
- * Servlet implementation class ProjectServlet
+ * Servlet implementation class TaskServlet
  */
-@WebServlet("/ProjectServlet")
-public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTasks {
+@WebServlet("/TaskServlet")
+public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks {
 	private static final long serialVersionUID = 1L;
     private ServletHelper sh;
     private NavigationBarObject nbo;
     private MyTasksObject mto;
-    private ProjectObject po;
+    private TaskObject t;
 	HttpServletRequest req;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProjectServlet() {
+    public TaskServlet() {
         super();
     }
 
@@ -42,7 +44,7 @@ public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTa
 		req = request;
 		configureJSP(request, response);
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/Project.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/Task.jsp");
 		view.forward(request, response);
 	}
 	
@@ -50,17 +52,17 @@ public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTa
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks();
-//      po = sh.getProject((request.getAttribute("projectName")).toString());
+//      t = sh.getWorkpackage((request.getAttribute("taskname")).toString());
         
-        // TO DO: NAME VOM PROJECT UEBER REQUEST ATTRIBUT
+        // TO DO: NAME VOM WORKPACKAGE UEBER REQUEST ATTRIBUT
         
-        po = sh.getProject("Project TEST");
+        t = sh.getTask("Task TEST");
         
 		setMyTasks();
 		setNavigationBar();
-		setProject();
+		setTask();
 	}
-
+	
 	@Override
 	public void setMyTasks() {
 		String myTasks = mto.getMyTasks();
@@ -76,28 +78,34 @@ public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTa
 		req.setAttribute("projectcontent", projectContent);
 		req.setAttribute("logo", logo);
 	}
-
-	private void setProject() {
-		String name = po.getName();
-		String nameLink = po.getNameLink();
-		String deadline = po.getDeadline();
-		String desc = po.getDescription();
-		String time = po.getTime();
-		String wps = po.getWorkpackages();
+	
+	private void setTask() {
+		String name = t.getName();
+		String nameLink = t.getNameLink();
+		String pNameLink = t.getProjectNameLink();
+		String wpNameLink = t.getWorkpackageNameLink();
+		String deadline = t.getDeadline();
+		String desc = t.getDescription();
+		String time = t.getTime();
+		String status = t.getStatus();
+		String au = t.getAssignedUser();
 		
-		req.setAttribute("name", name);
-		req.setAttribute("namelink", nameLink);
+		req.setAttribute("Name", name);
+		req.setAttribute("tasklink", nameLink);
+		req.setAttribute("projectlink", pNameLink);
+		req.setAttribute("workpackagelink", wpNameLink);
 		req.setAttribute("deadline", deadline);
 		req.setAttribute("description", desc);
 		req.setAttribute("time", time);
-		req.setAttribute("workpackages", wps);
+		req.setAttribute("status", status);
+		req.setAttribute("assigneduser", au);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
