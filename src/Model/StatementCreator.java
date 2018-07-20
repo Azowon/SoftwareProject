@@ -29,7 +29,7 @@ public class StatementCreator {
 		List<User> users=new ArrayList<User>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users","Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM users","Regular");
 			
 			while(res.next())
 			{
@@ -61,7 +61,7 @@ public class StatementCreator {
 		List<User> users=new ArrayList<User>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users_in_task, users WHERE users_in_task.user_id= users.user_id AND task_id="+taskId,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM users_in_task, users WHERE users_in_task.user_id= users.user_id AND task_id="+taskId,"Regular");
 			
 			while(res.next())
 			{
@@ -93,7 +93,7 @@ public class StatementCreator {
 		List<User> users=new ArrayList<User>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users WHERE "+condition,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM users WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
@@ -126,7 +126,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -146,7 +146,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -162,7 +162,8 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM users WHERE user_id="+u.getId(),"Regular");
+			//TODO Delete user role in project delete user role in task delete assigned user tasks
+			StatementExecutor.executeUpdate("DELETE FROM users WHERE user_id="+u.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -179,7 +180,7 @@ public class StatementCreator {
 		List<Project> projects=new ArrayList<Project>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM project","Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM project","Regular");
 			
 			while(res.next())
 			{
@@ -208,7 +209,7 @@ public class StatementCreator {
 		List<Project> projects=new ArrayList<Project>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM project WHERE "+condition,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM project WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
@@ -237,7 +238,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -255,7 +256,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -277,7 +278,7 @@ public class StatementCreator {
 			for(Workpackage w : workpackages) {
 				this.deleteWorkpackage(w);
 			}
-			StatementExecutor.execute("DELETE FROM project WHERE project_id="+p.getId(),"Regular");
+			StatementExecutor.executeUpdate("DELETE FROM project WHERE project_id="+p.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -294,7 +295,7 @@ public class StatementCreator {
 		List<Workpackage> workpackages=new ArrayList<Workpackage>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM workpackage","Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM workpackage","Regular");
 			
 			while(res.next())
 			{
@@ -324,12 +325,12 @@ public class StatementCreator {
 		List<Workpackage> workpackages=new ArrayList<Workpackage>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM workpackage WHERE "+condition,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM workpackage WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
 				workpackages.add(new Workpackage(
-						res.getLong("workpackaget_id"),
+						res.getLong("workpackage_id"),
 						res.getString("name"),
 						res.getString("description"),
 						res.getDate("deadline"),
@@ -355,7 +356,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -374,7 +375,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -395,7 +396,7 @@ public class StatementCreator {
 			{
 				this.deleteTask(t);
 			}
-			StatementExecutor.execute("DELETE FROM workpackage WHERE workpackage_id="+w.getId(),"Regular");
+			StatementExecutor.executeUpdate("DELETE FROM workpackage WHERE workpackage_id="+w.getId(),"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -412,7 +413,7 @@ public class StatementCreator {
 		List<Task> tasks=new ArrayList<Task>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM task","Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM task","Regular");
 			
 			while(res.next())
 			{
@@ -446,7 +447,7 @@ public class StatementCreator {
 		List<Task> tasks=new ArrayList<Task>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM users in_task, task WHERE users_in_task.task_id=task.task_id AND users_in_task.user_id="+userId,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM users in_task, task WHERE users_in_task.task_id=task.task_id AND users_in_task.user_id="+userId,"Regular");
 			
 			while(res.next())
 			{
@@ -480,7 +481,7 @@ public class StatementCreator {
 		List<Task> tasks=new ArrayList<Task>();
 		try 
 		{
-			ResultSet res=StatementExecutor.execute("SELECT * FROM task WHERE "+condition,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM task WHERE "+condition,"Regular");
 			
 			while(res.next())
 			{
@@ -515,7 +516,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -536,7 +537,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -552,8 +553,8 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELET FROM users_in_taks WHERE task_id="+t.getId(), "Regular");
-			StatementExecutor.execute("DELETE FROM task WHERE task_id="+t.getId(),"Regular");		
+			StatementExecutor.executeUpdate("DELETE FROM users_in_task WHERE task_id="+t.getId(), "Regular");
+			StatementExecutor.executeUpdate("DELETE FROM task WHERE task_id="+t.getId(),"Regular");		
 		}
 		catch (SQLException e) 
 		{
@@ -572,7 +573,7 @@ public class StatementCreator {
 		String s="";
 		try
 		{
-			ResultSet res=StatementExecutor.execute("SELECT role FROM user_in_project WHERE user_id="+userId+" AND project_id="+projectId,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT role FROM user_in_project WHERE user_id="+userId+" AND project_id="+projectId,"Regular");
 			res.next();
 			s=res.getString("role");
 		}
@@ -596,7 +597,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -616,7 +617,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -633,7 +634,7 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM project WHERE user_id="+userId+" AND project_id="+projectId,"Regular");
+			StatementExecutor.executeUpdate("DELETE FROM project WHERE user_id="+userId+" AND project_id="+projectId,"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -651,7 +652,7 @@ public class StatementCreator {
 		String s="";
 		try
 		{
-			ResultSet res=StatementExecutor.execute("SELECT tpoint FROM heatmap WHERE project_id="+projectId,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT tpoint FROM heatmap WHERE project_id="+projectId,"Regular");
 			res.next();
 			s=res.getString("tpoint");
 		}
@@ -674,7 +675,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -693,7 +694,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute(statement,"Regular");
+			StatementExecutor.executeUpdate(statement,"Regular");
 		} 
 		catch (SQLException e) 
 		{
@@ -709,7 +710,7 @@ public class StatementCreator {
 	{
 		try
 		{
-			StatementExecutor.execute("DELETE FROM heatmap WHERE project_id="+projectId,"Regular");
+			StatementExecutor.executeUpdate("DELETE FROM heatmap WHERE project_id="+projectId,"Regular");
 		}
 		catch (SQLException e) 
 		{
@@ -722,7 +723,7 @@ public class StatementCreator {
 		String s="";
 		try
 		{
-			ResultSet res=StatementExecutor.execute("SELECT password FROM authentication WHERE username='"+username+"'","Password");
+			ResultSet res=StatementExecutor.executeQuery("SELECT password FROM authentication WHERE username='"+username+"'","Password");
 			res.next();
 			s=res.getString("password");
 		}
@@ -742,7 +743,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			StatementExecutor.execute("INSERT INTO authentication VALUES (\'"+username+"\',\'"+pwHash+"\')","Password");
+			StatementExecutor.executeUpdate("INSERT INTO authentication VALUES (\'"+username+"\',\'"+pwHash+"\')","Password");
 		} 
 		catch (SQLException e) 
 		{
@@ -756,7 +757,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			ResultSet res=StatementExecutor.executeQuery(statement,"Regular");
 			res.next();
 			return res.getDouble("sum");
 		} 
@@ -774,7 +775,7 @@ public class StatementCreator {
 				+ ") from workpackage where project_id="+projectId;
 		try 
 		{
-			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			ResultSet res=StatementExecutor.executeQuery(statement,"Regular");
 			res.next();
 			return res.getDouble("sum");
 		} 
@@ -791,7 +792,7 @@ public class StatementCreator {
 		
 		try 
 		{
-			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			ResultSet res=StatementExecutor.executeQuery(statement,"Regular");
 			res.next();
 			return res.getDouble("sum");
 		} 
@@ -809,7 +810,7 @@ public class StatementCreator {
 				+ ") from workpackage where project_id="+projectId;
 		try 
 		{
-			ResultSet res=StatementExecutor.execute(statement,"Regular");
+			ResultSet res=StatementExecutor.executeQuery(statement,"Regular");
 			res.next();
 			return res.getDouble("sum");
 		} 
