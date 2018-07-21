@@ -2,15 +2,15 @@ package Controller;
 
 public abstract class State {
 
-	main main;
+	Heatmap main;
 	
-	State(main main)
+	State(Heatmap main)
 	{
 		this.main = main;
 		
 	}
 	
-	public abstract void drawHeatmap();
+	public abstract String drawHeatmap();
 	
 	public abstract void checkForNextState();
 	

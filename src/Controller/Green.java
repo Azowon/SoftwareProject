@@ -4,14 +4,14 @@ public class Green extends State {
 
 	int grenzwert  = 0;
 	
-	Green(main main) {
+	Green(Heatmap main) {
 		super(main);
 		
 	}
 
 	@Override
-	public void drawHeatmap() {
-		System.out.println("Jetzt wird die Heatmap grün dargestellt");
+	public String drawHeatmap() {
+		return "green";
 		
 	}
 
