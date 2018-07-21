@@ -8,8 +8,8 @@
     <body>
         <div id="navigationbar">
             <div id="logodiv">
-                <form action="${pageContext.request.contextPath}/indexServlet" method="post">
-                    <input type='image' src='${pageContext.request.contextPath}${logo}'/>
+                <form action="index.html">
+                    <a href="index.html"><img id="logo" src="LOGO.png"></a>
                 </form>
             </div>
             <div id="pdiv">
@@ -28,32 +28,28 @@
         <div class="content">
             <div class="create-model">
                 <div class="nav-links">
-                    <a href="${pageContext.request.contextPath}/${project}">${project}</a> -
-                    <a href="${pageContext.request.contextPath}/${workpackage}">${workpackage}</a>
+                    <a href="${pageContext.request.contextPath}/${project}">${project}</a>
+            		<a href="${pageContext.request.contextPath}/${workpackage}">${workpackage}</a>
                 </div>
-                <h1>Create new Task</h1>
-                <form>
+                <h1>Edit Workpackage</h1>
+                <form action="void()" method="get">
                     <table class="create-table">
                         <tr>
-                            <td>Task Name: </td>
-                            <td><input type="text" name="task-name"/></td>
+                            <td>Workpackage Name:</td>
+                            <td><input type="text" name="workpackage-name" value="${workpackage}"/></td>
                         </tr>
                         <tr>
-                            <td>Deadline: </td>
-                            <td><input type="date" name="task-deadline"/></td>
+                            <td>Deadline:</td>
+                            <td><input type="date" name="workpackage-deadline" value="${projectdeadline}"/></td>
                         </tr>
                         <tr>
-                            <td>Time: </td>
-                            <td><input type="text" name="task-time"/></td>
-                        </tr>
-                        <tr>
-                            <td>Description: </td>
-                            <td><textarea rows="5" cols="50" name="task-description"></textarea></td>
+                            <td>Description:</td>
+                            <td><textarea rows="5" cols="50" name="workpackage-description">${workpackagedetails}</textarea></td>
                         </tr>
                     </table>
-                    <button type="submit" class="create-button">Create</button>
+                    <button type="submit" class="apply-button">Apply</button>
                 </form>
-				<form action="${pageContext.request.contextPath}/${workproject}">
+                <form action="${pageContext.request.contextPath}/${workpackage}">
                 	<button class="cancel-button">Cancel</button>
             	</form>
             </div>

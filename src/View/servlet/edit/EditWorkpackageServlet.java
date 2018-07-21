@@ -1,4 +1,4 @@
-package View.servlet.create;
+package View.servlet.edit;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CreateTaskServlet
+ * Servlet implementation class EditWorkpackage
  */
-@WebServlet("/CreateTaskServlet")
-public class CreateTaskServlet extends HttpServlet {
+@WebServlet("/EditWorkpackageServlet")
+public class EditWorkpackageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateTaskServlet() {
+    public EditWorkpackageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,9 +28,8 @@ public class CreateTaskServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		RequestDispatcher view = request.getRequestDispatcher("/TaskServlet");
+		RequestDispatcher view = request.getRequestDispatcher("editWorkpackage.jsp");
 		view.forward(request, response);
 	}
 

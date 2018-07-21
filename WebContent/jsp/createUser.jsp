@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css">
@@ -26,36 +27,40 @@
             </div>
         </div>
         <div class="content">
-            <div class="create-model">
-                <div class="nav-links">
-                    <a href="${pageContext.request.contextPath}/${project}">${project}</a> -
-                    <a href="${pageContext.request.contextPath}/${workpackage}">${workpackage}</a>
-                </div>
-                <h1>Create new Task</h1>
-                <form>
-                    <table class="create-table">
+            <div class="edit-model">
+                <h1>Create new User</h1>
+                <form action="void()" method="get">
+                    <table class="edit-table">
                         <tr>
-                            <td>Task Name: </td>
-                            <td><input type="text" name="task-name"/></td>
+                            <td>Role:</td>
+                            <td>
+                                <select name="user-role">
+                                    <option>member</option>
+                                    <option>admin</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
-                            <td>Deadline: </td>
-                            <td><input type="date" name="task-deadline"/></td>
+                            <td>First Name:</td>
+                            <td><input type="text" name="user-firstname"/></td>
                         </tr>
                         <tr>
-                            <td>Time: </td>
-                            <td><input type="text" name="task-time"/></td>
+                            <td>Last Name:</td>
+                            <td><input type="text" name="user-lastname"/></td>
                         </tr>
                         <tr>
-                            <td>Description: </td>
-                            <td><textarea rows="5" cols="50" name="task-description"></textarea></td>
+                            <td>Team:</td>
+                            <td><input type="text" name="user-team"/></td>
+                        </tr>
+                        <tr>
+                            <td>Description:</td>
+                            <td><textarea rows="5" cols="50" name="user-description"></textarea></td>
                         </tr>
                     </table>
-                    <button type="submit" class="create-button">Create</button>
+                    <form action="${pageContext.request.contextPath}/indexServlet" method="get">
+                		<button class="cancel-button">Cancel</button>
+            		</form>
                 </form>
-				<form action="${pageContext.request.contextPath}/${workproject}">
-                	<button class="cancel-button">Cancel</button>
-            	</form>
             </div>
         </div>
     </body>

@@ -28,32 +28,31 @@
         <div class="content">
             <div class="create-model">
                 <div class="nav-links">
-                    <a href="${pageContext.request.contextPath}/${project}">${project}</a> -
-                    <a href="${pageContext.request.contextPath}/${workpackage}">${workpackage}</a>
-                </div>
-                <h1>Create new Task</h1>
-                <form>
+                    <a href="${pageContext.request.contextPath}/${project}">${project}</a>
+            	</div>
+                <h1>Edit Task</h1>
+                <form action="void()" method="get">
                     <table class="create-table">
                         <tr>
-                            <td>Task Name: </td>
-                            <td><input type="text" name="task-name"/></td>
+                            <td>Task Name:</td>
+                            <td><input type="text" name="task-name" value="${task}"/></td>
                         </tr>
                         <tr>
-                            <td>Deadline: </td>
-                            <td><input type="date" name="task-deadline"/></td>
+                            <td>Deadline</td>
+                            <td><input type="date" name="task-deadline" value="${taskdeadline}"/></td>
                         </tr>
                         <tr>
-                            <td>Time: </td>
-                            <td><input type="text" name="task-time"/></td>
+                            <td>Story Points:</td>
+                            <td><input type="text" name="task-time" value="${tasktime}"/></td>
                         </tr>
                         <tr>
-                            <td>Description: </td>
-                            <td><textarea rows="5" cols="50" name="task-description"></textarea></td>
+                            <td>Description:</td>
+                            <td><textarea rows="5" cols="50" name="task-description">${taskdetails}</textarea></td>
                         </tr>
                     </table>
-                    <button type="submit" class="create-button">Create</button>
+                    <button type="submit" class="apply-button">Apply</button>
                 </form>
-				<form action="${pageContext.request.contextPath}/${workproject}">
+                <form action="${pageContext.request.contextPath}/${task}">
                 	<button class="cancel-button">Cancel</button>
             	</form>
             </div>
