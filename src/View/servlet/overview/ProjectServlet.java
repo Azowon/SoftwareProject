@@ -56,7 +56,9 @@ public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTa
         
         // TO DO: NAME VOM PROJECT UEBER REQUEST ATTRIBUT
         
-        po = sh.getProject("Project TEST");
+        //po = sh.getProject("Project TEST");
+        long projectId=Long.parseLong(request.getQueryString().split("=")[1]);
+        po=sh.getProject(projectId);
         
 		setMyTasks();
 		setNavigationBar();
