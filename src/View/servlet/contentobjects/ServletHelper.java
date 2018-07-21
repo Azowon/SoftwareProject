@@ -1,6 +1,13 @@
 package View.servlet.contentobjects;
 
+import java.util.List;
+
+import Model.Project;
+import Model.StatementCreator;
+
 public class ServletHelper {
+	
+	private StatementCreator st=new StatementCreator();
 	
 	public NavigationBarObject getNavigationBar() {
 		return generateNavigationBar();
@@ -10,8 +17,15 @@ public class ServletHelper {
 		
 		// TO DO: DATENBANKABFRAGE ALLER NAMEN VON EXISTIERENDEN PROJEKTEN
 		
+		List<Project> projects= st.selectProjects();
+		
 		NavigationBarObject nbo = new NavigationBarObject();
-		nbo.addProjectContent("/SoftwareProject/ProjectServlet", "Project TEST");
+		
+		for(Project p: projects)
+		{
+			nbo.addProjectContent("/SoftwareProject/ProjectServlet?id="+p.getId(), p.getName());
+		}
+		//nbo.addProjectContent("/SoftwareProject/ProjectServlet", "Project TEST");
 		return nbo;
 	}
 	
@@ -28,14 +42,14 @@ public class ServletHelper {
 		return mto;
 	}
 	
-	public ProjectObject getProject(String projectName) {
+	public ProjectObject getProject(long projectId) {
 		ProjectObject po = new ProjectObject();
 		
 		// TO DO: DATENBANKABFRAGE ALLER PROJEKTDETAILS + GESAMT TIME + WORKPACKAGES IM PROJEKT
-		
-		po.setName("Project TEST");
-		po.setDeadline("24.07.2018");
-		po.setDescription("This is Project A.");
+		Project p=st.selectProjectsWhere("project_id="+projectId).get(0);
+		po.setName(p.getName());
+		po.setDeadline(p.getDeadline().toString());
+		po.setDescription(p.getDescription());
 		po.setTime("80");
 		po.setWorkpackages("<tr><th>Name</th><th>Deadline</th><th>SP left</th><th>Description</th></tr><tr><td><a href='Workpackage.html'>Workpackage 1</a></td><td>24.07.2018</td><td class='spleft'>15</td><td>Search feature</td></tr><tr><td><a href>Workpackage 2</a></td><td>24.07.2018</td><td class='spleft'>19</td><td>Bugs</td></tr><tr><td><a href>Workpackage 3</a></td><td>24.07.2018</td><td class='spleft'>5</td><td>Translation</td></tr>");
 	

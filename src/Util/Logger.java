@@ -46,7 +46,7 @@ public class Logger {
 			}
 			
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			System.out.println("Can't create Error Log :"+e.getMessage());
 		}

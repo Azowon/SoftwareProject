@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.Date;
 import java.util.List;
 
 public class testClassDeleteIfNecessary {
@@ -8,12 +9,10 @@ public class testClassDeleteIfNecessary {
 		// TODO Auto-generated method stub
 		StatementCreator st=new StatementCreator();
 		
-		List<Project> tasks=st.selectProjects();
-		for(Project t : tasks)
-		{
-			if(t.getId()==1)
-				st.deleteProject(t);
+		Project p= new Project(-1,"First","asdf",new Date(0));
+		Project p2= new Project(-1,"Second","asdf",new Date(0));
+		st.insertProject(p);
+		st.insertProject(p2);
 		}
-	}
 
 }
