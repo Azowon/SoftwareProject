@@ -1,7 +1,9 @@
 package View.servlet.contentobjects;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Model.Workpackage;
 
@@ -13,6 +15,7 @@ public class ProjectObject {
 	private String deadline;
 	private String time;
 	private List<Workpackage> workpackages=new ArrayList<Workpackage>();
+	private Map<Long, String> wpTimes=new HashMap<Long,String>();
 	
 	public long getProjectId() {
 		return projectId;
@@ -28,15 +31,14 @@ public class ProjectObject {
 	
 	public void setName(String name) {
 		this.name = name;
-		setNameLink(name);
 	}
 	
 	public String getNameLink() {
 		return nameLink;
 	}
 	
-	public void setNameLink(String nameLink) {
-		this.nameLink = "<a href='/SoftwareProject/ProjectServlet'>" + nameLink + "</a>";
+	public void setNameLink() {
+		this.nameLink = "<a href='/SoftwareProject/ProjectServlet?id="+this.projectId+"'>" + this.name + "</a>";
 	}
 	
 	public String getDescription() {
@@ -65,12 +67,13 @@ public class ProjectObject {
 	
 	public String getWorkpackageString() {
 		String res="<tr><th>Name</th><th>Deadline</th><th>SP left</th><th>Description</th></tr>";
-		//TODO add time thing
+		
 		for(Workpackage w : workpackages)
 		{
+			String timeContent=this.wpTimes.get(w.getId());
 			res+="<tr><td><a href='/SoftwareProject/WorkpackageServlet?id="+w.getId()+"'>"+w.getName()+"1</a></td><td>"
-					+w.getDeadline().toString()+"</td><td class='spleft'>15</td>"
-							+ "<td>"+w.getDescription()+"/td></tr>";
+					+w.getDeadline().toString()+"</td><td class='spleft'>"+timeContent+"</td>"
+							+ "<td>"+w.getDescription()+"</td></tr>";
 		}
 		return res;
 	}
@@ -88,5 +91,10 @@ public class ProjectObject {
 				this.addWorkpackage(w);
 			}
 		}
+	}
+	
+	public void addWorkpackageTime(long wpId, String content)
+	{
+		this.wpTimes.put(wpId, content);
 	}
 }

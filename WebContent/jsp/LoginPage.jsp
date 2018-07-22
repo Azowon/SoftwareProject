@@ -11,11 +11,11 @@
                 <table id="loginbox">
                     <tr>
                         <td id="formtext">Login:</td>
-                        <td id="forminput"><input type="text"/></td>
+                        <td id="forminput"><input name="Username" id="Username" type="text"/></td>
                     </tr>
                     <tr>
                         <td id="formtext">Password:</td>
-                        <td id="forminput"><input type="password"/></td>
+                        <td id="forminput"><input name="Password" id="Password" type="password"/></td>
                     </tr>
                     <tr>
                         <td></td>

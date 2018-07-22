@@ -6,25 +6,15 @@ import java.util.List;
 import Model.Task;
 
 public class WorkpackageObject {
-//	private long workpackageId;
 	private String name;
-	private String id;
+	private long id;
 	private String nameLink;
-//	private long projectId;
 	private String projectName;
 	private String projectNameLink;
 	private String description;
 	private String deadline;
 	private String time;
 	private List<Task> tasks=new ArrayList<Task>();
-	
-//	public long getWorkpackageId() {
-//		return workpackageId;
-//	}
-//
-//	public void setWorkpackageId(long workpackageId) {
-//		this.workpackageId = workpackageId;
-//	}
 	
 	public String getName() {
 		return name;
@@ -39,20 +29,9 @@ public class WorkpackageObject {
 	}
 
 	public void setNameLink() {
-		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + "</a>";
+		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + " </a>";
 	}
 	
-//	public void setNameLink(String nameLink) {
-//		this.nameLink = nameLink;
-//	}
-//
-//	public long getProjectId() {
-//		return projectId;
-//	}
-//
-//	public void setProjectId(long projectId) {
-//		this.projectId = projectId;
-//	}
 
 	public String getProjectName() {
 		return projectName;
@@ -67,12 +46,8 @@ public class WorkpackageObject {
 	}
 
 	public void setProjectNameLink(String projectName,long projectId) {
-		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet?id='"+projectId+">" + projectName + "</a>";
+		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet?id="+projectId+"'>" + projectName + "</a>";
 	}
-	
-//	public void setProjectNameLink(String projectNameLink) {
-//		this.projectNameLink = projectNameLink;
-//	}
 	
 	public String getDescription() {
 		return description;
@@ -104,7 +79,7 @@ public class WorkpackageObject {
 		{
 			s+="<tr><td><a href='/SoftwareProject/TaskServlet?id="+t.getId()+"'>"+t.getName()+"</a></td><td>"
 					+t.getDeadline().toString()+"</td><td class='spleft'>"+t.getTimeBooked()+" ("+t.getTimePlanned()
-					+")</td><td>"+t.getDescription()+"/td></tr>";
+					+")</td><td>"+t.getDescription()+"</td></tr>";
 		}
 		return s;
 	}
@@ -122,11 +97,11 @@ public class WorkpackageObject {
 		}
 	}
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 }

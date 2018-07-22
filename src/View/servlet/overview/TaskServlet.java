@@ -42,6 +42,11 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req = request;
+		if(request.getSession().getAttribute("username")==null)
+		{
+			RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
+			view.forward(req, response);
+		}
 		configureJSP(request, response);
 		
 		RequestDispatcher view = req.getRequestDispatcher("jsp/Task.jsp");
@@ -52,7 +57,7 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
-        mto = sh.getMyTasks();
+        mto = sh.getMyTasks((String)req.getSession().getAttribute("username"));
         
         long taskId=Long.parseLong(request.getQueryString().split("=")[1]);
         t=sh.getTask(taskId);

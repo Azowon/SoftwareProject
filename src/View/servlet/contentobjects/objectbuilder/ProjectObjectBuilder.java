@@ -3,7 +3,7 @@ package View.servlet.contentobjects.objectbuilder;
 import View.servlet.contentobjects.ProjectObject;
 
 public class ProjectObjectBuilder {
-//	private long projectId;
+	private long projectId;
 	private String name;
 	private String nameLink;
 	private String description;
@@ -17,7 +17,7 @@ public class ProjectObjectBuilder {
 	public ProjectObject build() {
 		ProjectObject po = new ProjectObject();
 		
-//		po.setProjectId(projectId);
+		po.setProjectId(projectId);
 		po.setName(name);
 		po.setDescription(description);
 		po.setDeadline(deadline);

@@ -42,21 +42,24 @@ public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTa
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req = request;
+
+		if(request.getSession().getAttribute("username")==null)
+		{
+			RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
+			view.forward(req, response);
+		}
+		
 		configureJSP(request, response);
 		
 		RequestDispatcher view = req.getRequestDispatcher("jsp/Project.jsp");
-		view.forward(request, response);
+		view.forward(req, response);
 	}
 	
 	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
-        mto = sh.getMyTasks();
-//      po = sh.getProject((request.getAttribute("projectName")).toString());
+        mto = sh.getMyTasks((String)req.getSession().getAttribute("username"));
         
-        // TO DO: NAME VOM PROJECT UEBER REQUEST ATTRIBUT
-        
-        //po = sh.getProject("Project TEST");
         long projectId=Long.parseLong(request.getQueryString().split("=")[1]);
         po=sh.getProject(projectId);
         

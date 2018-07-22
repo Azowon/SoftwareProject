@@ -16,9 +16,14 @@ public class ServletHelper {
 		return generateNavigationBar();
 	}
 	
+	public boolean checkLogin(String username, String password)
+	{
+		if(username==null) return false;
+		return st.checkPassword(username, password);
+	}
+	
 	private NavigationBarObject generateNavigationBar() {
 		
-		// TO DO: DATENBANKABFRAGE ALLER NAMEN VON EXISTIERENDEN PROJEKTEN
 		
 		List<Project> projects= st.selectProjects();
 		
@@ -28,27 +33,31 @@ public class ServletHelper {
 		{
 			nbo.addProjectContent("/SoftwareProject/ProjectServlet?id="+p.getId(), p.getName());
 		}
-		//nbo.addProjectContent("/SoftwareProject/ProjectServlet", "Project TEST");
+		
 		return nbo;
 	}
 	
-	public MyTasksObject getMyTasks() {
-		return generateMyTasks();
+	public MyTasksObject getMyTasks(String username) {
+		return generateMyTasks(username);
 	}
 	
-	private MyTasksObject generateMyTasks() {
-		
-		// TO DO: DATENBANKABFRAGE DER DER TASKS EINES BENUTZERS
-		
+	private MyTasksObject generateMyTasks(String username) {
 		MyTasksObject mto = new MyTasksObject();
-		mto.addTask("Finished", "ABC");
+		// TO DO: DATENBANKABFRAGE DER DER TASKS EINES BENUTZERS
+		User u=st.selectUsersWhere("username='"+username+"'").get(0);
+		
+		List<Task> tasks=st.selectTasksForUser(u.getId());
+		
+		for(Task t : tasks)
+		{
+			mto.addTask(t.getStatus(), t.getName());
+		}			
 		return mto;
 	}
 	
 	public ProjectObject getProject(long projectId) {
 		ProjectObject po = new ProjectObject();
 		
-		// TO DO: DATENBANKABFRAGE ALLER PROJEKTDETAILS + GESAMT TIME + WORKPACKAGES IM PROJEKT
 		Project p=st.selectProjectsWhere("project_id="+projectId).get(0);
 		
 		double timePlanned=st.selectTimePlannedForProject(projectId);
@@ -58,9 +67,19 @@ public class ServletHelper {
 		po.setDeadline(p.getDeadline().toString());
 		po.setDescription(p.getDescription());
 		po.setTime(timeBooked+" ("+timePlanned+")");
+		po.setProjectId(p.getId());
+		po.setNameLink();
 		
 		List<Workpackage> workpackages=st.selectWorkpackageWhere("project_id="+projectId);
 		po.addWorkpackageRange(workpackages);
+		
+		for(Workpackage w : workpackages)
+		{
+			timePlanned=st.selectTimePlannedForWorkpackage(w.getId());
+			timeBooked=st.selectTimeBookedForWorkpackage(w.getId());
+			String s=timeBooked+" ("+timePlanned+")";
+			po.addWorkpackageTime(w.getId(), s);
+		}
 		
 		return po;
 	}
@@ -68,7 +87,6 @@ public class ServletHelper {
 	public WorkpackageObject getWorkpackage(long workpackageId) {
 		WorkpackageObject wp = new WorkpackageObject();
 		
-		// TO DO: DATENBANKABFRAGE ALLER WORKPACKAGEDETAILS + GESAMT TIME + TASKS + PROJECT DES WORKPACKAGES
 		Workpackage w=st.selectWorkpackageWhere("workpackage_id="+workpackageId).get(0);
 		
 		Project p=st.selectProjectsWhere("project_id="+w.getProjectId()).get(0);
@@ -78,12 +96,13 @@ public class ServletHelper {
 		
 		List<Task> tasks=st.selectTaskWhere("workpackage_id="+workpackageId);
 		
+		wp.setProjectNameLink(p.getName(), p.getId());
 		wp.setName(w.getName());
+		wp.setId(w.getId());
 		wp.setDeadline(w.getDeadline().toString());
 		wp.setDescription(w.getDescription());
 		wp.setTime(timeBooked+" ("+timePlanned+")");
 		wp.addTaskRange(tasks);
-		wp.setProjectNameLink(p.getName(),p.getId());
 		wp.setNameLink();
 		
 		return wp;

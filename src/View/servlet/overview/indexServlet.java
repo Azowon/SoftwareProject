@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import View.servlet.contentobjects.MyTasksObject;
 import View.servlet.contentobjects.NavigationBarObject;
@@ -40,6 +41,23 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req = request;
+		sh=new ServletHelper();
+		
+		HttpSession ses= req.getSession();
+		if(ses.getAttribute("username")==null)
+		{
+			String s = (String) request.getParameter("Username");
+			if(sh.checkLogin(s,request.getParameter("Password")))
+			{			
+				ses.setAttribute("username", s);
+			}
+			else
+			{
+				RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
+				view.forward(req, response);
+				return;
+			}
+		}
 		configureJSP();
 		
 		RequestDispatcher view = req.getRequestDispatcher("jsp/index.jsp");
@@ -48,9 +66,9 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 	
 	//Extra Method to configure jsp which will be forwarded to
 	private void configureJSP() {
-        sh = new ServletHelper();
+		
         nbo = sh.getNavigationBar();
-        mto = sh.getMyTasks();
+        mto = sh.getMyTasks((String)req.getSession().getAttribute("username"));
         
 		setTitle();
 		setFeed();
