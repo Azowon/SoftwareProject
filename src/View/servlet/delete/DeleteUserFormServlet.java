@@ -1,4 +1,4 @@
-package View.servlet.create;
+package View.servlet.delete;
 
 import java.io.IOException;
 
@@ -14,19 +14,20 @@ import View.servlet.contentobjects.ServletHelper;
 import View.servlet.interfaces.INavigationBar;
 
 /**
- * Servlet implementation class CreateProjectFormServlet
+ * Servlet implementation class DeleteUser
  */
-@WebServlet("/CreateProjectFormServlet")
-public class CreateProjectFormServlet extends HttpServlet implements INavigationBar {
+@WebServlet("/DeleteUserFormServlet")
+public class DeleteUserFormServlet extends HttpServlet implements INavigationBar {
 	private static final long serialVersionUID = 1L;
+    private final String title = "Create User";
     private ServletHelper sh;
     private NavigationBarObject nbo;
 	HttpServletRequest req;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateProjectFormServlet() {
+    public DeleteUserFormServlet() {
         super();
     }
 
@@ -37,10 +38,11 @@ public class CreateProjectFormServlet extends HttpServlet implements INavigation
 		req = request;
 		configureJSP();
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/createProject.jsp");
-		view.forward(req, response);
+		RequestDispatcher view = request.getRequestDispatcher("jsp/deleteUser.jsp");
+		view.forward(request, response);
 	}
 	
+	//Extra Method to configure jsp which will be forwarded to
 	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
@@ -49,11 +51,25 @@ public class CreateProjectFormServlet extends HttpServlet implements INavigation
         setNavigationBar();
 	}
 	
-	public void setTitle() {
-		String title = "Test";
+	/**
+	 * Set Title of the Window manually
+	 * @param title
+	 * 
+	 */
+	public void setTitle(String title) {
 		req.setAttribute("title", title);
 	}
 	
+	/**
+	 * Set Title of the Window with preset title
+	 */
+	private void setTitle() {
+		req.setAttribute("title", title);
+	}
+	
+	/**
+	 * Set up navigation bar
+	 */
 	@Override
 	public void setNavigationBar() {
 		String projectContent = nbo.getProjectContent();

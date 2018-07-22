@@ -1,4 +1,4 @@
-package View.servlet.create;
+package View.servlet.create.form;
 
 import java.io.IOException;
 
@@ -14,11 +14,12 @@ import View.servlet.contentobjects.ServletHelper;
 import View.servlet.interfaces.INavigationBar;
 
 /**
- * Servlet implementation class CreateTaskFormServlet
+ * Servlet implementation class CreateUserFormServlet
  */
-@WebServlet("/CreateTaskFormServlet")
-public class CreateTaskFormServlet extends HttpServlet implements INavigationBar {
+@WebServlet("/CreateUserFormServlet")
+public class CreateUserFormServlet extends HttpServlet implements INavigationBar {
 	private static final long serialVersionUID = 1L;
+    private final String title = "Create User";
     private ServletHelper sh;
     private NavigationBarObject nbo;
 	HttpServletRequest req;
@@ -26,9 +27,8 @@ public class CreateTaskFormServlet extends HttpServlet implements INavigationBar
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateTaskFormServlet() {
+    public CreateUserFormServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -38,10 +38,11 @@ public class CreateTaskFormServlet extends HttpServlet implements INavigationBar
 		req = request;
 		configureJSP();
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/createTask.jsp");
-		view.forward(req, response);
+		RequestDispatcher view = req.getRequestDispatcher("jsp/createUser.jsp");
+		view.forward(request, response);
 	}
 	
+	//Extra Method to configure jsp which will be forwarded to
 	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
@@ -50,11 +51,25 @@ public class CreateTaskFormServlet extends HttpServlet implements INavigationBar
         setNavigationBar();
 	}
 	
-	public void setTitle() {
-		String title = "Test";
+	/**
+	 * Set Title of the Window manually
+	 * @param title
+	 * 
+	 */
+	public void setTitle(String title) {
 		req.setAttribute("title", title);
 	}
 	
+	/**
+	 * Set Title of the Window with preset title
+	 */
+	private void setTitle() {
+		req.setAttribute("title", title);
+	}
+	
+	/**
+	 * Set up navigation bar
+	 */
 	@Override
 	public void setNavigationBar() {
 		String projectContent = nbo.getProjectContent();

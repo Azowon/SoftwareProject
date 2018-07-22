@@ -1,5 +1,3 @@
-@CHARSET "ISO-8859-1";
-
 /* #################
    #    GENERAL    #
    ################# */
@@ -81,7 +79,39 @@ body {
     clear: both;
 }
 
+.create-user-div:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
 .create-user-button {
+    background-color: dodgerblue;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+/* delete user in navigation bar */
+#delete-user-div {
+    float: right;
+    margin-right: 15px;
+}
+
+#delete-user-div:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.delete-user-div:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.delete-user-button {
     background-color: dodgerblue;
     color: white;
     padding: 16px;
@@ -120,6 +150,8 @@ body {
 .project-content:hover {display: block;}
 
 .create-user-button:hover {background-color: deepskyblue;}
+
+.delete-user-button:hover {background-color: deepskyblue;}
 
 .user-config-button:hover {background-color: deepskyblue;}
 
@@ -281,6 +313,17 @@ body {
    ############## */
 
 #task-desc {
+    margin-bottom: 20px;
+    padding: 10px;
+    padding-left: 20px;
+    border: 1px black solid;
+}
+
+/* ##############
+   #    USER    #
+   ############## */
+
+#user-desc {
     margin-bottom: 20px;
     padding: 10px;
     padding-left: 20px;

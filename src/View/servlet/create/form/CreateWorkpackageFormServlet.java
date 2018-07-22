@@ -1,4 +1,4 @@
-package View.servlet.overview;
+package View.servlet.create.form;
 
 import java.io.IOException;
 
@@ -9,40 +9,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import View.servlet.contentobjects.MyTasksObject;
 import View.servlet.contentobjects.NavigationBarObject;
 import View.servlet.contentobjects.ServletHelper;
-import View.servlet.interfaces.IMyTasks;
 import View.servlet.interfaces.INavigationBar;
 
 /**
- * Servlet implementation class indexServlet
+ * Servlet implementation class CreateWorkpackageFormServlet
  */
-@WebServlet("/indexServlet")
-public class indexServlet extends HttpServlet implements INavigationBar, IMyTasks {
+@WebServlet("/CreateWorkpackageFormServlet")
+public class CreateWorkpackageFormServlet extends HttpServlet implements INavigationBar {
 	private static final long serialVersionUID = 1L;
-    private final String title = "Main Page";
+    private final String title = "Create Workpackage";
     private ServletHelper sh;
     private NavigationBarObject nbo;
-    private MyTasksObject mto;
 	HttpServletRequest req;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public indexServlet() {
+    public CreateWorkpackageFormServlet() {
         super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req = request;
 		configureJSP();
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/index.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/createWorkpackage.jsp");
 		view.forward(req, response);
 	}
 	
@@ -50,12 +46,10 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
-        mto = sh.getMyTasks();
-        
-		setTitle();
-		setFeed();
-		setNavigationBar();
-		setMyTasks();
+		
+        setTitle();
+        setProject();
+        setNavigationBar();
 	}
 	
 	/**
@@ -85,30 +79,22 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 		req.setAttribute("projectcontent", projectContent);
 		req.setAttribute("logo", logo);
 	}
-
-	/**
-	 * Set up tasks for logged in user
-	 */
-	@Override
-	public void setMyTasks() {
-		String myTasks = mto.getMyTasks();
-		
-		req.setAttribute("mytasks", myTasks);
-	}
 	
 	/**
-	 * Fill in news
+	 * Set link to project of workpackage
 	 */
-	private void setFeed() {
-		String feed = "Hello World";
-		req.setAttribute("feed", feed);
+	public void setProject() {
+		//TO DO PROJECT VOM WORKPACKAGE HERAUSFINDEN
+		
+		String project = "ProjectServlet";
+		req.setAttribute("project", project);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }

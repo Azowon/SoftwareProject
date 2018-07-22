@@ -6,14 +6,25 @@ import java.util.List;
 import Model.Task;
 
 public class WorkpackageObject {
+//	private long workpackageId;
 	private String name;
 	private String id;
 	private String nameLink;
+//	private long projectId;
+	private String projectName;
 	private String projectNameLink;
 	private String description;
 	private String deadline;
 	private String time;
 	private List<Task> tasks=new ArrayList<Task>();
+	
+//	public long getWorkpackageId() {
+//		return workpackageId;
+//	}
+//
+//	public void setWorkpackageId(long workpackageId) {
+//		this.workpackageId = workpackageId;
+//	}
 	
 	public String getName() {
 		return name;
@@ -26,18 +37,42 @@ public class WorkpackageObject {
 	public String getNameLink() {
 		return nameLink;
 	}
-	
+
 	public void setNameLink() {
 		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + "</a>";
+	}
+	
+//	public void setNameLink(String nameLink) {
+//		this.nameLink = nameLink;
+//	}
+//
+//	public long getProjectId() {
+//		return projectId;
+//	}
+//
+//	public void setProjectId(long projectId) {
+//		this.projectId = projectId;
+//	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 	
 	public String getProjectNameLink() {
 		return projectNameLink;
 	}
-	
+
 	public void setProjectNameLink(String projectName,long projectId) {
 		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet?id='"+projectId+">" + projectName + "</a>";
 	}
+	
+//	public void setProjectNameLink(String projectNameLink) {
+//		this.projectNameLink = projectNameLink;
+//	}
 	
 	public String getDescription() {
 		return description;

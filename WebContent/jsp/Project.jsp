@@ -19,10 +19,19 @@
                 </div>
             </div>
             <div id="udiv">
-                <button class="user-config-button" onclick="window.location.href = 'UserConfig.html';">User Config</button>
+            	<form action="${userpath}" method="post">
+                	<button class="user-config-button">${username}</button>
+                </form>
             </div>
+            <div id="delete-user-div">
+            	<form action="${pageContext.request.contextPath}/DeleteUser" method="post">
+                	<button class="delete-user-button">Delete User</button>
+            	</form>	
+			</div>
             <div id="create-user-div">
-                <button class="create-user-button" onclick="window.location.href = 'CreateUser.html'">Create User</button>
+            	<form action="${pageContext.request.contextPath}/CreateUser" method="post">
+                	<button class="create-user-button">Create User</button>
+            	</form>
             </div>
         </div>
         <div class="content">
@@ -55,9 +64,7 @@
             </div>
             <div id="my-tasks">
                 <table>
-                    <tr>
-						${mytasks}
-                    </tr>
+					${mytasks}
                 </table>
             </div>
         </div>

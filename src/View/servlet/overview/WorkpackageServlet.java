@@ -61,6 +61,9 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		
 	}
 
+	/**
+	 * Set up tasks for logged in user
+	 */
 	@Override
 	public void setMyTasks() {
 		String myTasks = mto.getMyTasks();
@@ -68,6 +71,9 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		req.setAttribute("mytasks", myTasks);
 	}
 
+	/**
+	 * Set up navigation bar
+	 */
 	@Override
 	public void setNavigationBar() {
 		String projectContent = nbo.getProjectContent();
@@ -77,6 +83,9 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		req.setAttribute("logo", logo);
 	}
 	
+	/**
+	 * Set details of the workpackage to be presented
+	 */
 	private void setWorkpackage() {
 		String name = wp.getName();
 		String nameLink = wp.getNameLink();
@@ -99,7 +108,6 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 }

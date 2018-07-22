@@ -1,8 +1,6 @@
-package View.servlet.edit;
+package View.servlet.delete;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditTask
+ * Servlet implementation class DeleteUserServlet
  */
-@WebServlet("/EditTaskServlet")
-public class EditTaskServlet extends HttpServlet {
+@WebServlet("/DeleteUserServlet")
+public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditTaskServlet() {
+    public DeleteUserServlet() {
         super();
     }
 
@@ -27,9 +25,8 @@ public class EditTaskServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		RequestDispatcher view = request.getRequestDispatcher("jsp/editTask.jsp");
-		view.forward(request, response);
+		//DELETE USER, GIVE RESPONSE THAT USER HAS BEEN DELETED
+		//FORWARD TO SAME PAGE AGAIN BUT RESETTED
 	}
 
 	/**

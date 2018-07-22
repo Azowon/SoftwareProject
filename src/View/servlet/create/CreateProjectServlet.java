@@ -21,7 +21,6 @@ public class CreateProjectServlet extends HttpServlet {
      */
     public CreateProjectServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

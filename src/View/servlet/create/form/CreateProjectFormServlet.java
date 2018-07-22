@@ -1,4 +1,4 @@
-package View.servlet.create;
+package View.servlet.create.form;
 
 import java.io.IOException;
 
@@ -14,19 +14,20 @@ import View.servlet.contentobjects.ServletHelper;
 import View.servlet.interfaces.INavigationBar;
 
 /**
- * Servlet implementation class CreateWorkpackageFormServlet
+ * Servlet implementation class CreateProjectFormServlet
  */
-@WebServlet("/CreateWorkpackageFormServlet")
-public class CreateWorkpackageFormServlet extends HttpServlet implements INavigationBar {
+@WebServlet("/CreateProjectFormServlet")
+public class CreateProjectFormServlet extends HttpServlet implements INavigationBar {
 	private static final long serialVersionUID = 1L;
-    private ServletHelper sh;
+    private final String title = "Create Project";
+	private ServletHelper sh;
     private NavigationBarObject nbo;
 	HttpServletRequest req;
-       
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateWorkpackageFormServlet() {
+    public CreateProjectFormServlet() {
         super();
     }
 
@@ -37,29 +38,38 @@ public class CreateWorkpackageFormServlet extends HttpServlet implements INaviga
 		req = request;
 		configureJSP();
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/createWorkpackage.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/createProject.jsp");
 		view.forward(req, response);
 	}
 	
+	//Extra Method to configure jsp which will be forwarded to
 	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
 		
         setTitle();
-        setProject();
         setNavigationBar();
 	}
 	
-	public void setTitle() {
-		String title = "Test";
+	/**
+	 * Set Title of the Window manually
+	 * @param title
+	 * 
+	 */
+	public void setTitle(String title) {
 		req.setAttribute("title", title);
 	}
 	
-	public void setProject() {
-		String project = "ProjectServlet";
-		req.setAttribute("project", project);
+	/**
+	 * Set Title of the Window with preset title
+	 */
+	private void setTitle() {
+		req.setAttribute("title", title);
 	}
 	
+	/**
+	 * Set up navigation bar
+	 */
 	@Override
 	public void setNavigationBar() {
 		String projectContent = nbo.getProjectContent();

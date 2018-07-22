@@ -33,7 +33,7 @@ public class RegularConnectionInstance implements IConnectionInstance{
 		{
 			this.setDatabaseConnection(
 					DriverManager.getConnection("jdbc:postgresql://localhost/sw_project",
-							"postgres", "postgres" ));
+							"postgres", "123456" ));
 			
 		} 
 		catch (SQLException e) 

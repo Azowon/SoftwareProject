@@ -1,4 +1,4 @@
-package View.servlet.edit;
+package View.servlet.create;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditTask
+ * Servlet implementation class CreateUserServlet
  */
-@WebServlet("/EditTaskServlet")
-public class EditTaskServlet extends HttpServlet {
+@WebServlet("/CreateUserServlet")
+public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditTaskServlet() {
+    public CreateUserServlet() {
         super();
     }
 
@@ -27,8 +27,7 @@ public class EditTaskServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		RequestDispatcher view = request.getRequestDispatcher("jsp/editTask.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/UserProfile");
 		view.forward(request, response);
 	}
 

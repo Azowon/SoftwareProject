@@ -48,6 +48,7 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 		view.forward(request, response);
 	}
 	
+	//Extra Method to configure jsp which will be forwarded to
 	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
@@ -61,6 +62,9 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 		setTask();
 	}
 	
+	/**
+	 * Set up tasks for logged in user
+	 */
 	@Override
 	public void setMyTasks() {
 		String myTasks = mto.getMyTasks();
@@ -68,6 +72,9 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 		req.setAttribute("mytasks", myTasks);
 	}
 
+	/**
+	 * Set up navigation bar
+	 */
 	@Override
 	public void setNavigationBar() {
 		String projectContent = nbo.getProjectContent();
@@ -77,6 +84,9 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 		req.setAttribute("logo", logo);
 	}
 	
+	/**
+	 * Set details of the tasks to be presented
+	 */
 	private void setTask() {
 		String name = t.getName();
 		String nameLink = t.getNameLink();

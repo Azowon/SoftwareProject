@@ -6,12 +6,21 @@ import java.util.List;
 import Model.Workpackage;
 
 public class ProjectObject {
+	private long projectId;
 	private String name;
 	private String nameLink;
 	private String description;
 	private String deadline;
 	private String time;
 	private List<Workpackage> workpackages=new ArrayList<Workpackage>();
+	
+	public long getProjectId() {
+		return projectId;
+	}
+	
+	public void setProjectId(long projectId) {
+		this.projectId = projectId;
+	}
 	
 	public String getName() {
 		return name;

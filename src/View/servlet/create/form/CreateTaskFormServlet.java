@@ -1,4 +1,4 @@
-package View.servlet.overview;
+package View.servlet.create.form;
 
 import java.io.IOException;
 
@@ -9,40 +9,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import View.servlet.contentobjects.MyTasksObject;
 import View.servlet.contentobjects.NavigationBarObject;
 import View.servlet.contentobjects.ServletHelper;
-import View.servlet.interfaces.IMyTasks;
 import View.servlet.interfaces.INavigationBar;
 
 /**
- * Servlet implementation class indexServlet
+ * Servlet implementation class CreateTaskFormServlet
  */
-@WebServlet("/indexServlet")
-public class indexServlet extends HttpServlet implements INavigationBar, IMyTasks {
+@WebServlet("/CreateTaskFormServlet")
+public class CreateTaskFormServlet extends HttpServlet implements INavigationBar {
 	private static final long serialVersionUID = 1L;
-    private final String title = "Main Page";
+    private final String title = "Create Task";
     private ServletHelper sh;
     private NavigationBarObject nbo;
-    private MyTasksObject mto;
 	HttpServletRequest req;
-	
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public indexServlet() {
+    public CreateTaskFormServlet() {
         super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req = request;
 		configureJSP();
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/index.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/createTask.jsp");
 		view.forward(req, response);
 	}
 	
@@ -50,12 +46,9 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
-        mto = sh.getMyTasks();
-        
-		setTitle();
-		setFeed();
-		setNavigationBar();
-		setMyTasks();
+		
+        setTitle();
+        setNavigationBar();
 	}
 	
 	/**
@@ -87,28 +80,11 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 	}
 
 	/**
-	 * Set up tasks for logged in user
-	 */
-	@Override
-	public void setMyTasks() {
-		String myTasks = mto.getMyTasks();
-		
-		req.setAttribute("mytasks", myTasks);
-	}
-	
-	/**
-	 * Fill in news
-	 */
-	private void setFeed() {
-		String feed = "Hello World";
-		req.setAttribute("feed", feed);
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }
