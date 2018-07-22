@@ -1,7 +1,9 @@
 package Controller;
-import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+import java.util.List;
 
-public class main {
+import Model.*;
+
+public class Heatmap {
 
 	int grenzwert = 0, aufwand = 0;
 	
@@ -31,24 +33,13 @@ public class main {
 	}
 
 	
-	public main(int grenzwertGrün, int grenzwertGelb)
+	public Heatmap(int grenzwertGrün, int grenzwertGelb)
 	{
 		setGrenzwerte(grenzwertGrün, grenzwertGelb);
 		
 	}
 	
-	public static void main(String... args)
-	{
-		main Heatmap = new main(50,80);
 
-		Heatmap.setAufwand(20);
-		Heatmap.setAufwand(40);
-		Heatmap.drawMap();
-		Heatmap.setAufwand(60);
-		Heatmap.drawMap();
-		Heatmap.setAufwand(90);
-		Heatmap.drawMap();
-	}
 	
 	
 
@@ -57,9 +48,9 @@ public class main {
 		this.currentState = currentState;
 	}
 	
-	public void drawMap()
+	public String drawMap()
 	{
-		currentState.drawHeatmap();
+		return currentState.drawHeatmap();
 	}
 	
 	public State getGreen()
