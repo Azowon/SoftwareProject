@@ -87,7 +87,7 @@ public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTa
 		String deadline = po.getDeadline();
 		String desc = po.getDescription();
 		String time = po.getTime();
-		String wps = po.getWorkpackages();
+		String wps = po.getWorkpackageString();
 		
 		req.setAttribute("name", name);
 		req.setAttribute("namelink", nameLink);

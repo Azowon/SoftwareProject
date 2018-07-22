@@ -4,6 +4,7 @@ import java.util.List;
 
 import Model.Project;
 import Model.StatementCreator;
+import Model.Workpackage;
 
 public class ServletHelper {
 	
@@ -47,26 +48,39 @@ public class ServletHelper {
 		
 		// TO DO: DATENBANKABFRAGE ALLER PROJEKTDETAILS + GESAMT TIME + WORKPACKAGES IM PROJEKT
 		Project p=st.selectProjectsWhere("project_id="+projectId).get(0);
+		
+		double timePlanned=st.selectTimePlannedForProject(projectId);
+		double timeBooked=st.selectTimeBookedForProject(projectId);
+		
 		po.setName(p.getName());
 		po.setDeadline(p.getDeadline().toString());
 		po.setDescription(p.getDescription());
-		po.setTime("80");
-		po.setWorkpackages("<tr><th>Name</th><th>Deadline</th><th>SP left</th><th>Description</th></tr><tr><td><a href='Workpackage.html'>Workpackage 1</a></td><td>24.07.2018</td><td class='spleft'>15</td><td>Search feature</td></tr><tr><td><a href>Workpackage 2</a></td><td>24.07.2018</td><td class='spleft'>19</td><td>Bugs</td></tr><tr><td><a href>Workpackage 3</a></td><td>24.07.2018</td><td class='spleft'>5</td><td>Translation</td></tr>");
-	
+		po.setTime(timeBooked+" ("+timePlanned+")");
+		
+		List<Workpackage> workpackages=st.selectWorkpackageWhere("project_id="+projectId);
+		po.addWorkpackageRange(workpackages);
+		
 		return po;
 	}
 	
-	public WorkpackageObject getWorkpackage(String workpackageName) {
+	public WorkpackageObject getWorkpackage(long workpackageId) {
 		WorkpackageObject wp = new WorkpackageObject();
 		
 		// TO DO: DATENBANKABFRAGE ALLER WORKPACKAGEDETAILS + GESAMT TIME + TASKS + PROJECT DES WORKPACKAGES
+		Workpackage w=st.selectWorkpackageWhere("workpackage_id="+workpackageId).get(0);
 		
-		wp.setName("Workpackage TEST");
-		wp.setDeadline("24.07.2018");
-		wp.setDescription("This is Workpackage TEST from Project TEST.");
-		wp.setTime("15 (25)");
+		Project p=st.selectProjectsWhere("project_id="+w.getProjectId()).get(0);
+		
+		double timeBooked=st.selectTimeBookedForWorkpackage(workpackageId);
+		double timePlanned=st.selectTimePlannedForWorkpackage(workpackageId);
+		
+		wp.setName(w.getName());
+		wp.setDeadline(w.getDeadline().toString());
+		wp.setDescription(w.getDescription());
+		wp.setTime(timeBooked+" ("+timePlanned+")");
 		wp.setTasks("<tr><th>Name</th><th>Deadline</th><th>SP left</th><th>Description</th></tr><tr><td><a href='Task.html'>Task 1</a></td><td>12.07.2018</td><td class='spleft'>0</td><td>Design</td></tr><tr><td><a href>Task 2</a></td><td>24.07.2018</td><td class='spleft'>5</td><td>Function</td></tr><tr><td><a href>Task 3</a></td><td>24.07.2018</td><td class='spleft'>10</td><td>Bugs</td></tr>");
-		wp.setProjectNameLink("Poject TEST");
+		wp.setProjectNameLink(p.getName(),p.getId());
+		wp.setNameLink();
 		
 		return wp;
 	}

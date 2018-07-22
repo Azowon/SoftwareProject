@@ -51,15 +51,14 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks();
-//      wp = sh.getWorkpackage((request.getAttribute("workpackagename")).toString());
+
+        long workpackageId=Long.parseLong(request.getQueryString().split("=")[1]);
+        wp = sh.getWorkpackage(workpackageId);
         
-        // TO DO: NAME VOM WORKPACKAGE UEBER REQUEST ATTRIBUT
-        
-        wp = sh.getWorkpackage("Workpackage TEST");
-        
+        setWorkpackage();
 		setMyTasks();
 		setNavigationBar();
-		setWorkpackage();
+		
 	}
 
 	@Override

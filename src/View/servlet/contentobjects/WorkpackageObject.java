@@ -2,6 +2,7 @@ package View.servlet.contentobjects;
 
 public class WorkpackageObject {
 	private String name;
+	private String id;
 	private String nameLink;
 	private String projectNameLink;
 	private String description;
@@ -15,23 +16,22 @@ public class WorkpackageObject {
 	
 	public void setName(String name) {
 		this.name = name;
-		setNameLink(name);
 	}
 	
 	public String getNameLink() {
 		return nameLink;
 	}
 	
-	public void setNameLink(String nameLink) {
-		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet'>" + nameLink + "</a>";
+	public void setNameLink() {
+		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + "</a>";
 	}
 	
 	public String getProjectNameLink() {
 		return projectNameLink;
 	}
 	
-	public void setProjectNameLink(String projectNameLink) {
-		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet'>" + projectNameLink + "</a>";
+	public void setProjectNameLink(String projectName,long projectId) {
+		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet?id='"+projectId+">" + projectName + "</a>";
 	}
 	
 	public String getDescription() {
@@ -64,5 +64,13 @@ public class WorkpackageObject {
 	
 	public void setTasks(String tasks) {
 		this.tasks = tasks;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }
