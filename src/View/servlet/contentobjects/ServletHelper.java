@@ -7,6 +7,9 @@ import Model.StatementCreator;
 import Model.Task;
 import Model.User;
 import Model.Workpackage;
+import View.servlet.contentobjects.objectbuilder.ProjectObjectBuilder;
+import View.servlet.contentobjects.objectbuilder.TaskObjectBuilder;
+import View.servlet.contentobjects.objectbuilder.WorkpackageObjectBuilder;
 
 public class ServletHelper {
 	
@@ -56,23 +59,23 @@ public class ServletHelper {
 	}
 	
 	public ProjectObject getProject(long projectId) {
-		ProjectObject po = new ProjectObject();
-		
+
 		Project p=st.selectProjectsWhere("project_id="+projectId).get(0);
+		
+		List<Workpackage> workpackages=st.selectWorkpackageWhere("project_id="+projectId);
 		
 		double timePlanned=st.selectTimePlannedForProject(projectId);
 		double timeBooked=st.selectTimeBookedForProject(projectId);
 		
-		po.setName(p.getName());
-		po.setDeadline(p.getDeadline().toString());
-		po.setDescription(p.getDescription());
-		po.setTime(timeBooked+" ("+timePlanned+")");
-		po.setProjectId(p.getId());
-		po.setNameLink();
-		
-		List<Workpackage> workpackages=st.selectWorkpackageWhere("project_id="+projectId);
-		po.addWorkpackageRange(workpackages);
-		
+		ProjectObject po =new ProjectObjectBuilder()
+			.setDeadlin(p.getDeadline().toString())
+			.setDescription(p.getDescription())
+			.setName(p.getName())
+			.setTime(timeBooked+" ("+timePlanned+")")
+			.setProjectId(p.getId())
+			.setWorkpackages(workpackages)
+			.build();
+						
 		for(Workpackage w : workpackages)
 		{
 			timePlanned=st.selectTimePlannedForWorkpackage(w.getId());
@@ -85,7 +88,6 @@ public class ServletHelper {
 	}
 	
 	public WorkpackageObject getWorkpackage(long workpackageId) {
-		WorkpackageObject wp = new WorkpackageObject();
 		
 		Workpackage w=st.selectWorkpackageWhere("workpackage_id="+workpackageId).get(0);
 		
@@ -96,20 +98,21 @@ public class ServletHelper {
 		
 		List<Task> tasks=st.selectTaskWhere("workpackage_id="+workpackageId);
 		
-		wp.setProjectNameLink(p.getName(), p.getId());
-		wp.setName(w.getName());
-		wp.setId(w.getId());
-		wp.setDeadline(w.getDeadline().toString());
-		wp.setDescription(w.getDescription());
-		wp.setTime(timeBooked+" ("+timePlanned+")");
-		wp.addTaskRange(tasks);
-		wp.setNameLink();
+		WorkpackageObject wp =new WorkpackageObjectBuilder()
+				.setDeadline(w.getDeadline().toString())
+				.setDescription(w.getDescription())
+				.setName(w.getName())
+				.setProjectName(p.getName())
+				.setProjectId(p.getId())
+				.setWorkpackageId(w.getId())
+				.setTime(timeBooked+" ("+timePlanned+")")
+				.setTasks(tasks)
+				.build();
 		
 		return wp;
 	}
 	
 	public TaskObject getTask(long  taskId) {
-		TaskObject t = new TaskObject();
 		
 		Task k= st.selectTaskWhere("task_id="+taskId).get(0);
 		Workpackage w= st.selectWorkpackageWhere("workpackage_id="+k.getWorkpackageId()).get(0);
@@ -117,16 +120,19 @@ public class ServletHelper {
 		
 		User u=st.selectUsersWhere("user_id="+k.getUserId()).get(0);
 
-		t.setName(k.getName());
-		t.setDeadline(k.getDeadline().toString());
-		t.setDescription(k.getDescription());
-		t.setTime(k.getTimeBooked()+" ("+k.getTimePlanned()+")");
-		t.setProjectNameLink(p.getId(),p.getName());
-		t.setWorkpackageNameLink(w.getId(),w.getName());
-		t.setStatus(k.getStatus());
-		t.setAssignedUser(u.getFirstname()+" "+u.getLastname());
-		t.setId(k.getId());
-		t.setNameLink();
+		TaskObject t = new TaskObjectBuilder()
+				.setDeadline(k.getDeadline().toString())
+				.setDescription(k.getDescription())
+				.setAssignedUser(u.getFirstname()+" "+u.getLastname())
+				.setName(k.getName())
+				.setStatus(k.getStatus())
+				.setTime(k.getTimeBooked()+" ("+k.getTimePlanned()+")")
+				.setProjectName(p.getName())
+				.setProjectId(p.getId())
+				.setTaskId(k.getId())
+				.setWorkpackageName(w.getName())
+				.setWorkpackageId(w.getId())
+				.build();
 		
 		return t;
 	}

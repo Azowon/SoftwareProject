@@ -1,15 +1,17 @@
 package View.servlet.contentobjects.objectbuilder;
 
+import java.util.List;
+
+import Model.Workpackage;
 import View.servlet.contentobjects.ProjectObject;
 
 public class ProjectObjectBuilder {
 	private long projectId;
 	private String name;
-	private String nameLink;
 	private String description;
 	private String deadline;
 	private String time;
-//	private String workpackages;
+	private List<Workpackage> workpackages;
 
 	public ProjectObjectBuilder() {
 	}
@@ -22,29 +24,19 @@ public class ProjectObjectBuilder {
 		po.setDescription(description);
 		po.setDeadline(deadline);
 		po.setTime(time);
-//		po.setWorkpackages(workpackages);
-//		
-//		if(nameLink == null) {
-//			nameLink = "<form action='/SoftwareProject/ProjectServlet' method='post'>"
-//					+ "<div id='projectid' style='display:none;'>"
-//					+ projectId + "</div><a onclick='form.submit();''>" + name + "</a></form>";
-//		}
+		po.setNameLink();
+		po.addWorkpackageRange(workpackages);
 		
 		return po;
 	}
 	
-//	public ProjectObjectBuilder setProjectId(long projectId) {
-//		this.projectId = projectId;
-//		return this;
-//	}
-	
-	public ProjectObjectBuilder setName(String name) {
-		this.name = name;
+	public ProjectObjectBuilder setProjectId(long projectId) {
+		this.projectId = projectId;
 		return this;
 	}
 	
-	public ProjectObjectBuilder setNameLink(String nameLink) {
-		this.nameLink = nameLink;
+	public ProjectObjectBuilder setName(String name) {
+		this.name = name;
 		return this;
 	}
 	
@@ -63,8 +55,8 @@ public class ProjectObjectBuilder {
 		return this;
 	}
 	
-//	public ProjectObjectBuilder setWorkpackages(String workpackages) {
-//		this.workpackages = workpackages;
-//		return this;
-//	}
+	public ProjectObjectBuilder setWorkpackages(List<Workpackage> workpackages) {
+		this.workpackages = workpackages;
+		return this;
+	}
 }
