@@ -21,7 +21,14 @@ public class PasswordConnectionInstance implements IConnectionInstance {
 	 * Defines new connection with parameters from settings file
 	 */
 	public PasswordConnectionInstance(){
-		
+		if(!Settings.isLoaded) 
+		{
+			try {
+				Settings.loadSettings();
+			} catch (SettingsFileNotExistingException e) {
+				Logger.log(e.getMessage());
+			}
+		}
 		try
 		{
 			Class.forName("org.postgresql.Driver");
@@ -33,28 +40,13 @@ public class PasswordConnectionInstance implements IConnectionInstance {
 		try 
 		{
 			this.setDatabaseConnection(
-					DriverManager.getConnection ("jdbc:postgresql://localhost/db_auth"
-							,"postgres", "postgres"));
+					DriverManager.getConnection (Settings.passwordDatabaseName
+							,Settings.passwordDatabaseUsername, Settings.passwordDatabasePassword ));
 		} 
 		catch (SQLException e) 
 		{
 			Logger.log(e.getMessage());
 		}
-	}
-	
-	private void holdthis()
-	{
-		if(!Settings.isLoaded) 
-		{
-			try {
-				Settings.loadSettings();
-			} catch (SettingsFileNotExistingException e) {
-				Logger.log(e.getMessage());
-			}
-		}
-		//this.setDatabaseConnection(
-		//		DriverManager.getConnection (Settings.passwordDatabaseName
-		//				,Settings.passwordDatabaseUsername, Settings.passwordDatabasePassword ));
 	}
 	
 	/**

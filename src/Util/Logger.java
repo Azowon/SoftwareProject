@@ -1,8 +1,6 @@
 package Util;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Logger class providing error logging
@@ -33,13 +31,12 @@ public class Logger {
 	 */
 	private static File getFile()
 	{
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();
 		
+		String s = "C:\\Log.txt";
 		File f=null;
 		try
 		{
-			f=new File(s+"\\Log.txt");
+			f=new File(s);
 			if(!f.exists())
 			{
 				f.createNewFile();

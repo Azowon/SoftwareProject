@@ -1,8 +1,6 @@
 package Util;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Holds application settings
@@ -25,10 +23,9 @@ public class Settings {
 	 */
 	public static void loadSettings() throws SettingsFileNotExistingException
 	{
-		Path currentRelativePath = Paths.get("");
-		String s = currentRelativePath.toAbsolutePath().toString();
 		
-		File f=new File(s+"\\Settings.txt");
+		String s="C:\\Settings.txt";
+		File f=new File(s);
 		
 		if(!f.exists()) throw new SettingsFileNotExistingException();
 		

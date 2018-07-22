@@ -20,7 +20,14 @@ public class RegularConnectionInstance implements IConnectionInstance{
 	 * Defines new connection with parameters from settings file
 	 */
 	public RegularConnectionInstance(){
-		
+		if(!Settings.isLoaded) 
+		{
+			try {
+				Settings.loadSettings();
+			} catch (SettingsFileNotExistingException e) {
+				Logger.log(e.getMessage());
+			}
+		}
 		try
 		{
 			Class.forName("org.postgresql.Driver");
@@ -32,8 +39,8 @@ public class RegularConnectionInstance implements IConnectionInstance{
 		try 
 		{
 			this.setDatabaseConnection(
-					DriverManager.getConnection("jdbc:postgresql://localhost/sw_project",
-							"postgres", "postgres" ));
+			DriverManager.getConnection(Settings.regularDatabaseName,
+					Settings.regularDatabaseUsername, Settings.regularDatabasePassword ));
 			
 		} 
 		catch (SQLException e) 
@@ -42,19 +49,6 @@ public class RegularConnectionInstance implements IConnectionInstance{
 		}
 	}
 	
-	private void holdthis() {
-		/*if(!Settings.isLoaded) 
-		{
-			try {
-				Settings.loadSettings();
-			} catch (SettingsFileNotExistingException e) {
-				Logger.log(e.getMessage());
-			}
-		}*/
-		/*this.setDatabaseConnection(
-		DriverManager.getConnection(Settings.regularDatabaseName,
-				Settings.regularDatabaseUsername, Settings.regularDatabasePassword ));*/
-	}
 	
 	/**
 	 * Returns database connection
