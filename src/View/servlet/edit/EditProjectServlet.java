@@ -29,7 +29,7 @@ public class EditProjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher view = request.getRequestDispatcher("editProject.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("jsp/editProject.jsp");
 		view.forward(request, response);
 	}
 

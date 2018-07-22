@@ -2,6 +2,7 @@ package View.servlet.contentobjects;
 
 public class TaskObject {
 	private String name;
+	private long id;
 	private String nameLink;
 	private String projectNameLink;
 	private String workpackageNameLink;
@@ -17,31 +18,30 @@ public class TaskObject {
 	
 	public void setName(String name) {
 		this.name = name;
-		setNameLink(name);
 	}
 	
 	public String getNameLink() {
 		return nameLink;
 	}
 	
-	public void setNameLink(String nameLink) {
-		this.nameLink = "<a href='/SoftwareProject/TaskServlet'>" + nameLink + "</a>";
+	public void setNameLink() {
+		this.nameLink = "<a href='/SoftwareProject/TaskServlet?id="+this.id+"'>" + this.nameLink + "</a>";
 	}
 	
 	public String getProjectNameLink() {
 		return projectNameLink;
 	}
 	
-	public void setProjectNameLink(String projectNameLink) {
-		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet'>" + projectNameLink + "</a>";
+	public void setProjectNameLink(long projectId, String projectNameLink) {
+		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet?id="+projectId+"'>" + projectNameLink + "</a>";
 	}
 	
 	public String getWorkpackageNameLink() {
 		return workpackageNameLink;
 	}
 	
-	public void setWorkpackageNameLink(String workpackageNameLink) {
-		this.workpackageNameLink = "<a href='/SoftwareProject/WorkpackageServlet'>" + workpackageNameLink + "</a>";
+	public void setWorkpackageNameLink(long workpackageId, String workpackageNameLink) {
+		this.workpackageNameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+workpackageId+"'>" + workpackageNameLink + "</a>";
 	}
 	
 	public String getDeadline() {
@@ -82,5 +82,13 @@ public class TaskObject {
 	
 	public void setAssignedUser(String assignedUser) {
 		this.assignedUser = assignedUser;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }

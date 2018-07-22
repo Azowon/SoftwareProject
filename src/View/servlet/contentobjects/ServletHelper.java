@@ -4,6 +4,8 @@ import java.util.List;
 
 import Model.Project;
 import Model.StatementCreator;
+import Model.Task;
+import Model.User;
 import Model.Workpackage;
 
 public class ServletHelper {
@@ -74,30 +76,38 @@ public class ServletHelper {
 		double timeBooked=st.selectTimeBookedForWorkpackage(workpackageId);
 		double timePlanned=st.selectTimePlannedForWorkpackage(workpackageId);
 		
+		List<Task> tasks=st.selectTaskWhere("workpackage_id="+workpackageId);
+		
 		wp.setName(w.getName());
 		wp.setDeadline(w.getDeadline().toString());
 		wp.setDescription(w.getDescription());
 		wp.setTime(timeBooked+" ("+timePlanned+")");
-		wp.setTasks("<tr><th>Name</th><th>Deadline</th><th>SP left</th><th>Description</th></tr><tr><td><a href='Task.html'>Task 1</a></td><td>12.07.2018</td><td class='spleft'>0</td><td>Design</td></tr><tr><td><a href>Task 2</a></td><td>24.07.2018</td><td class='spleft'>5</td><td>Function</td></tr><tr><td><a href>Task 3</a></td><td>24.07.2018</td><td class='spleft'>10</td><td>Bugs</td></tr>");
+		wp.addTaskRange(tasks);
 		wp.setProjectNameLink(p.getName(),p.getId());
 		wp.setNameLink();
 		
 		return wp;
 	}
 	
-	public TaskObject getTask(String taskName) {
+	public TaskObject getTask(long  taskId) {
 		TaskObject t = new TaskObject();
 		
-		// TO DO: DATENBANKABFRAGE ALLER TASKDETAILS
+		Task k= st.selectTaskWhere("task_id="+taskId).get(0);
+		Workpackage w= st.selectWorkpackageWhere("workpackage_id="+k.getWorkpackageId()).get(0);
+		Project p=st.selectProjectsWhere("project_id="+w.getProjectId()).get(0);
+		
+		User u=st.selectUsersWhere("user_id="+k.getUserId()).get(0);
 
-		t.setName("Task TEST");
-		t.setDeadline("24.07.2018");
-		t.setDescription("This is Taks 1: Design from Workpackage 1: Search feature.");
-		t.setTime("0 (2)");
-		t.setProjectNameLink("Project TEST");
-		t.setWorkpackageNameLink("Workpackage TEST");
-		t.setStatus("Finished");
-		t.setAssignedUser("Nguyen");
+		t.setName(k.getName());
+		t.setDeadline(k.getDeadline().toString());
+		t.setDescription(k.getDescription());
+		t.setTime(k.getTimeBooked()+" ("+k.getTimePlanned()+")");
+		t.setProjectNameLink(p.getId(),p.getName());
+		t.setWorkpackageNameLink(w.getId(),w.getName());
+		t.setStatus(k.getStatus());
+		t.setAssignedUser(u.getFirstname()+" "+u.getLastname());
+		t.setId(k.getId());
+		t.setNameLink();
 		
 		return t;
 	}

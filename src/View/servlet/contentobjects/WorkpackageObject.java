@@ -1,5 +1,10 @@
 package View.servlet.contentobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Model.Task;
+
 public class WorkpackageObject {
 	private String name;
 	private String id;
@@ -8,7 +13,7 @@ public class WorkpackageObject {
 	private String description;
 	private String deadline;
 	private String time;
-	private String tasks;
+	private List<Task> tasks=new ArrayList<Task>();
 	
 	public String getName() {
 		return name;
@@ -59,11 +64,27 @@ public class WorkpackageObject {
 	}
 	
 	public String getTasks() {
-		return tasks;
+		String s="<tr><th>Name</th><th>Deadline</th><th>SP left</th><th>Description</th></tr>";
+		for(Task t : this.tasks)
+		{
+			s+="<tr><td><a href='/SoftwareProject/TaskServlet?id="+t.getId()+"'>"+t.getName()+"</a></td><td>"
+					+t.getDeadline().toString()+"</td><td class='spleft'>"+t.getTimeBooked()+" ("+t.getTimePlanned()
+					+")</td><td>"+t.getDescription()+"/td></tr>";
+		}
+		return s;
 	}
 	
-	public void setTasks(String tasks) {
-		this.tasks = tasks;
+	public void addTask(Task t)
+	{
+		this.tasks.add(t);
+	}
+	
+	public void addTaskRange(List<Task> tasks)
+	{
+		for(Task t : tasks)
+		{
+			this.addTask(t);
+		}
 	}
 
 	public String getId() {

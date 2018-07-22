@@ -52,11 +52,9 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks();
-//      t = sh.getWorkpackage((request.getAttribute("taskname")).toString());
         
-        // TO DO: NAME VOM WORKPACKAGE UEBER REQUEST ATTRIBUT
-        
-        t = sh.getTask("Task TEST");
+        long taskId=Long.parseLong(request.getQueryString().split("=")[1]);
+        t=sh.getTask(taskId);
         
 		setMyTasks();
 		setNavigationBar();
