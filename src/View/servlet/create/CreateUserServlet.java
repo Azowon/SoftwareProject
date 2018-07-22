@@ -27,7 +27,7 @@ public class CreateUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher view = request.getRequestDispatcher("/UserProfile");
+		RequestDispatcher view = request.getRequestDispatcher("jsp/UserProfile.jsp");
 		view.forward(request, response);
 	}
 

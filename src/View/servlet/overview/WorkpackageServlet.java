@@ -45,6 +45,7 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		{
 			RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
 			view.forward(req, response);
+			return;
 		}
 		
 		configureJSP(request, response);

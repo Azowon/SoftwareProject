@@ -24,12 +24,12 @@
                 </form>
             </div>
             <div id="delete-user-div">
-            	<form action="${pageContext.request.contextPath}/DeleteUser" method="post">
+            	<form action="${pageContext.request.contextPath}/DeleteUserServlet" method="post">
                 	<button class="delete-user-button">Delete User</button>
             	</form>	
 			</div>
             <div id="create-user-div">
-            	<form action="${pageContext.request.contextPath}/CreateUser" method="post">
+            	<form action="${pageContext.request.contextPath}/CreateUserServlet" method="post">
                 	<button class="create-user-button">Create User</button>
             	</form>
             </div>

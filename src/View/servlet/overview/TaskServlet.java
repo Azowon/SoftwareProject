@@ -46,6 +46,7 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 		{
 			RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
 			view.forward(req, response);
+			return;
 		}
 		configureJSP(request, response);
 		

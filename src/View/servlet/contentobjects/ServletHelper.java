@@ -43,7 +43,7 @@ public class ServletHelper {
 	
 	private MyTasksObject generateMyTasks(String username) {
 		MyTasksObject mto = new MyTasksObject();
-		// TO DO: DATENBANKABFRAGE DER DER TASKS EINES BENUTZERS
+		
 		User u=st.selectUsersWhere("username='"+username+"'").get(0);
 		
 		List<Task> tasks=st.selectTasksForUser(u.getId());
