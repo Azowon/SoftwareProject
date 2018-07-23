@@ -166,6 +166,12 @@ public class ServletHelper {
 			nbo.addProjectContent("/SoftwareProject/ProjectServlet?id="+p.getId(), p.getName());
 		}
 		
+			
+		for(Project p: projects)
+		{
+			nbo.addHeatmapContent("/SoftwareProject/HeatmapProjectServlet?id="+p.getId(), p.getName());
+		}
+		
 		return nbo;
 	}
 	
@@ -197,7 +203,7 @@ public class ServletHelper {
 		double timeBooked=st.selectTimeBookedForProject(projectId);
 		
 		ProjectObject po =new ProjectObjectBuilder()
-			.setDeadlin(p.getDeadline().toString())
+			.setDeadline(p.getDeadline().toString())
 			.setDescription(p.getDescription())
 			.setName(p.getName())
 			.setTime(timeBooked+" ("+timePlanned+")")
@@ -214,6 +220,43 @@ public class ServletHelper {
 		}
 		
 		return po;
+	}
+	
+	public HeatmapProjectObject getHeaptmapProject(long projectId) {
+		Project p=st.selectProjectsWhere("project_id="+projectId).get(0);
+		
+		List<Workpackage> workpackages=st.selectWorkpackageWhere("project_id="+projectId);
+		
+		double timePlanned=st.selectTimePlannedForProject(projectId);
+		double timeBooked=st.selectTimeBookedForProject(projectId);
+		
+		ProjectObject po =new ProjectObjectBuilder()
+			.setDeadline(p.getDeadline().toString())
+			.setDescription(p.getDescription())
+			.setName(p.getName())
+			.setTime(timeBooked+" ("+timePlanned+")")
+			.setProjectId(p.getId())
+			.setWorkpackages(workpackages)
+			.build();
+		
+		HeatmapProjectObject hpo = new HeatmapProjectObject();
+		hpo.setProjectId(projectId);
+		hpo.setTimeBooked(timeBooked);
+		hpo.setTimePlanned(timePlanned);
+		hpo.setDeadline(po.getDeadline());
+		hpo.setName(po.getName());
+		hpo.setGeneratedColor(projectId);
+		hpo.setWorkpackages(workpackages);
+						
+		for(Workpackage w : workpackages)
+		{
+			timePlanned=st.selectTimePlannedForWorkpackage(w.getId());
+			timeBooked=st.selectTimeBookedForWorkpackage(w.getId());
+			String s=timeBooked+" ("+timePlanned+")";
+			hpo.addWorkpackageTime(w.getId(), s);
+		}
+		
+		return hpo;
 	}
 	
 	public WorkpackageObject getWorkpackage(long workpackageId) {
@@ -239,6 +282,32 @@ public class ServletHelper {
 				.build();
 		
 		return wp;
+	}
+	
+	public HeatmapWorkpackageObject getHeatmapWorkpackage(long workpackageId) {
+		
+		Workpackage w=st.selectWorkpackageWhere("workpackage_id="+workpackageId).get(0);
+		HeatmapWorkpackageObject hwo = new HeatmapWorkpackageObject();
+		
+		
+		Project p=st.selectProjectsWhere("project_id="+w.getProjectId()).get(0);
+		
+		double timeBooked=st.selectTimeBookedForWorkpackage(workpackageId);
+		double timePlanned=st.selectTimePlannedForWorkpackage(workpackageId);
+		
+		List<Task> tasks=st.selectTaskWhere("workpackage_id="+workpackageId);
+
+		hwo.setTime(timeBooked + " / " + timePlanned);
+		hwo.setDeadline(w.getDeadline().toString());
+		hwo.setId(w.getId());
+		hwo.setName(w.getName());
+		hwo.setGeneratedColor(w.getId());
+		hwo.setTasks(tasks);
+		
+		
+		
+		
+		return hwo;
 	}
 	
 	public TaskObject getTask(long  taskId) {

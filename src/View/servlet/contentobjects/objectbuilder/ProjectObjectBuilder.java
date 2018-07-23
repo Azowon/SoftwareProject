@@ -45,7 +45,7 @@ public class ProjectObjectBuilder {
 		return this;
 	}
 	
-	public ProjectObjectBuilder setDeadlin(String deadline) {
+	public ProjectObjectBuilder setDeadline(String deadline) {
 		this.deadline = deadline;
 		return this;
 	}

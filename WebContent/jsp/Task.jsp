@@ -18,6 +18,12 @@
                     ${projectcontent}
                 </div>
             </div>
+            <div id="hdiv">
+            	<button class="hbutton">Heatmap</button>
+                <div class="heatmap-content">
+                    ${heatmapcontent}
+                </div>
+            </div>
             <div id="udiv">
             	<form action="${userpath}" method="post">
                 	<button class="user-config-button">${username}</button>

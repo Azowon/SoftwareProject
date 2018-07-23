@@ -8,93 +8,62 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import View.servlet.contentobjects.MyTasksObject;
+import View.servlet.contentobjects.HeatmapProjectObject;
 import View.servlet.contentobjects.NavigationBarObject;
+import View.servlet.contentobjects.ProjectObject;
 import View.servlet.contentobjects.ServletHelper;
-import View.servlet.interfaces.IMyTasks;
 import View.servlet.interfaces.INavigationBar;
 
 /**
- * Servlet implementation class indexServlet
+ * Servlet implementation class HeatmapServlet
  */
-@WebServlet("/indexServlet")
-public class indexServlet extends HttpServlet implements INavigationBar, IMyTasks {
+@WebServlet("/HeatmapProjectServlet")
+public class HeatmapProjectServlet extends HttpServlet implements INavigationBar {
 	private static final long serialVersionUID = 1L;
-    private final String title = "Main Page";
     private ServletHelper sh;
     private NavigationBarObject nbo;
-    private MyTasksObject mto;
 	HttpServletRequest req;
-	
+	ProjectObject po;
+	HeatmapProjectObject hpo;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public indexServlet() {
+    public HeatmapProjectServlet() {
         super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req = request;
-		sh=new ServletHelper();
-		
-		HttpSession ses= req.getSession();
-		if(ses.getAttribute("username")==null)
+
+		if(request.getSession().getAttribute("username")==null)
 		{
-			String s = (String) request.getParameter("Username");
-			if(sh.checkLogin(s,request.getParameter("Password")))
-			{			
-				ses.setAttribute("username", s);
-			}
-			else
-			{
-				RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
-				view.forward(req, response);
-				return;
-			}
+			RequestDispatcher view = req.getRequestDispatcher("jsp/HeatmapProject.jsp");
+			view.forward(req, response);
 		}
+		
 		configureJSP();
 		
-		RequestDispatcher view = req.getRequestDispatcher("jsp/index.jsp");
+		RequestDispatcher view = req.getRequestDispatcher("jsp/HeatmapProject.jsp");
 		view.forward(req, response);
 	}
 	
-	//Extra Method to configure jsp which will be forwarded to
 	private void configureJSP() {
-		
+        sh = new ServletHelper();
         nbo = sh.getNavigationBar();
-        mto = sh.getMyTasks((String)req.getSession().getAttribute("username"));
         
-		setTitle();
-		setFeed();
+        long projectId=Long.parseLong(req.getQueryString().split("=")[1]);
+        po = sh.getProject(projectId);
+        hpo = sh.getHeaptmapProject(projectId);
+
 		setNavigationBar();
-		setMyTasks();
+		setHeatmapContent();
 	}
-	
-	/**
-	 * Set Title of the Window manually
-	 * @param title
-	 * 
-	 */
-	public void setTitle(String title) {
-		req.setAttribute("title", title);
-	}
-	
-	/**
-	 * Set Title of the Window with preset title
-	 */
-	private void setTitle() {
-		req.setAttribute("title", title);
-	}
-	
-	/**
-	 * Set up navigation bar
-	 */
+
 	@Override
 	public void setNavigationBar() {
 		String projectContent = nbo.getProjectContent();
@@ -105,30 +74,26 @@ public class indexServlet extends HttpServlet implements INavigationBar, IMyTask
 		req.setAttribute("heatmapcontent", heatmapContent);
 		req.setAttribute("logo", logo);
 	}
-
-	/**
-	 * Set up tasks for logged in user
-	 */
-	@Override
-	public void setMyTasks() {
-		String myTasks = mto.getMyTasks();
-		
-		req.setAttribute("mytasks", myTasks);
-	}
 	
-	/**
-	 * Fill in news
-	 */
-	private void setFeed() {
-		String feed = "Hello World";
-		req.setAttribute("feed", feed);
+	private void setHeatmapContent() {
+		String name = hpo.getName();
+		String timeres = hpo.getTimeBooked() + " / " + hpo.getTimePlanned();
+		String deadline = hpo.getDeadline();
+		String workpackages = hpo.getWorkpackageString();
+		String color = hpo.getColor();
+		
+		req.setAttribute("name", name);
+		req.setAttribute("timeres", timeres);
+		req.setAttribute("deadline", deadline);
+		req.setAttribute("workpackages", workpackages);
+		req.setAttribute("color", color);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+
 }

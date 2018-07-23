@@ -8,7 +8,7 @@
     <body>
         <div id="navigationbar">
             <div id="logodiv">
-                <form action="${pageContext.request.contextPath}/indexServlet" method="post">
+                <form action="/SoftwareProject/indexServlet" method="post">
                     <input type='image' src='${pageContext.request.contextPath}${logo}'/>
                 </form>
             </div>
@@ -41,33 +41,28 @@
             </div>
         </div>
         <div class="content">
-            <div class="create-model">
-                <div class="nav-links">
-                	<div id="projectid" style="display:none;">${projectid}</div>
-                    <a href="${pageContext.request.contextPath}/${project}">${project}</a>
-            	</div>
-                <h1>Edit Project</h1>
-                <form action="void()" method="get">
-                    <table class="create-table">
-                        <tr>
-                            <td>Project Name:</td>
-                            <td><input type="text" name="project-name" value="${project}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Deadline:</td>
-                            <td><input type="date" name="project-deadline" value="${projectdeadline}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td>
-                            <td><textarea rows="5" cols="50" name="project-description">${projectdetails}</textarea></td>
-                        </tr>
+            <div class="overview-content">
+                <div id="heatmap-workpackage-desc">
+                    <h1>${name}</h1>
+	               	<div class="time-res">
+						Time booked/planned: ${timeres}
+					</div>
+                    <div class="deadline">
+                        Deadline: ${deadline}
+                    </div>
+                    <div>
+						Color: ${color}
+					</div>
+                </div>
+                <div id="heatmap-workpackage-tasks">
+                    <table class="overview-table">
+                        ${tasks}
                     </table>
-                    <button type="submit" class="apply-button">Apply</button>
-                </form>
-                <form action="${pageContext.request.contextPath}/${project}">
-                	<button class="cancel-button">Cancel</button>
-            	</form>
+                    <form type="submit" action="${pageContext.request.contextPath}/CreateTaskFormServlet" method="get">
+                        <button class="create-new-button">Create new Task</button>
+                    </form>
+                </div>
             </div>
-        </div>
+		</div>
     </body>
 </html>

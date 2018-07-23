@@ -41,32 +41,27 @@
             </div>
         </div>
         <div class="content">
-            <div class="create-model">
-                <div class="nav-links">
-                	<div id="projectid" style="display:none;">${projectid}</div>
-                    <a href="${pageContext.request.contextPath}/${project}">${project}</a>
-            	</div>
-                <h1>Edit Project</h1>
-                <form action="void()" method="get">
-                    <table class="create-table">
-                        <tr>
-                            <td>Project Name:</td>
-                            <td><input type="text" name="project-name" value="${project}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Deadline:</td>
-                            <td><input type="date" name="project-deadline" value="${projectdeadline}"/></td>
-                        </tr>
-                        <tr>
-                            <td>Description:</td>
-                            <td><textarea rows="5" cols="50" name="project-description">${projectdetails}</textarea></td>
-                        </tr>
-                    </table>
-                    <button type="submit" class="apply-button">Apply</button>
-                </form>
-                <form action="${pageContext.request.contextPath}/${project}">
-                	<button class="cancel-button">Cancel</button>
-            	</form>
+            <div class="overview-content">
+	            <div id="heatmap-project-desc">
+					<h1>${name}</h1>
+					<div class="time-res">
+						Time booked/planned: ${timeres}
+					</div>
+					<div class="deadline">
+						Deadline: ${deadline}
+					</div>
+					<div>
+						Color: ${color}
+					</div>
+				</div>
+	            <div id="heatmap-project-workpackages">
+	                <table class="overview-table">
+	                    ${workpackages}
+	                </table>
+	                <form type="submit" action="${pageContext.request.contextPath}/CreateWorkpackageFormServlet" method="get">
+	                	<button class="create-new-button">Create new Workpackage</button>
+	                </form>
+	            </div>
             </div>
         </div>
     </body>

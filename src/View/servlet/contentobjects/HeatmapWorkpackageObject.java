@@ -3,15 +3,15 @@ package View.servlet.contentobjects;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controller.Datenlieferant;
+import Controller.ProjectData;
+import Controller.WorkpackageData;
 import Model.Task;
+import Model.Workpackage;
 
-public class WorkpackageObject {
+public class HeatmapWorkpackageObject {
 	private String name;
 	private long id;
-	private String nameLink;
-	private String projectName;
-	private String projectNameLink;
-	private String description;
 	private String deadline;
 	private String time;
 	private String color;
@@ -24,6 +24,12 @@ public class WorkpackageObject {
 		this.color = color;
 	}
 	
+	public void setGeneratedColor(long workpackageId) {
+		Datenlieferant test = new Datenlieferant();
+		WorkpackageData wd = test.getWorkpackage(workpackageId);
+		color = wd.getColor();
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -31,40 +37,7 @@ public class WorkpackageObject {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String getNameLink() {
-		return nameLink;
-	}
 
-	public void setNameLink() {
-		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + "</a>";
-	}
-	
-
-	public String getProjectName() {
-		return projectName;
-	}
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-	
-	public String getProjectNameLink() {
-		return projectNameLink;
-	}
-
-	public void setProjectNameLink(String projectName,long projectId) {
-		this.projectNameLink = "<a href='/SoftwareProject/ProjectServlet?id="+projectId+"'>" + projectName + "</a>";
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
 	public String getDeadline() {
 		return deadline;
 	}
@@ -82,12 +55,12 @@ public class WorkpackageObject {
 	}
 	
 	public String getTasks() {
-		String s="<tr><th>Name</th><th>Deadline</th><th>SP left</th><th>Description</th></tr>";
+		String s="<tr><th>Name</th><th>Deadline</th><th>SP left</th></tr>";
 		for(Task t : this.tasks)
 		{
 			s+="<tr><td><a href='/SoftwareProject/TaskServlet?id="+t.getId()+"'>"+t.getName()+"</a></td><td>"
 					+t.getDeadline().toString()+"</td><td class='spleft'>"+t.getTimeBooked()+" ("+t.getTimePlanned()
-					+")</td><td>"+t.getDescription()+"</td></tr>";
+					+")</td></tr>";
 		}
 		return s;
 	}
@@ -111,5 +84,9 @@ public class WorkpackageObject {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public void setTasks(List<Task> task) {
+		this.tasks = task;
 	}
 }
