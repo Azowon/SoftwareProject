@@ -36,16 +36,16 @@
         </div>
         <div class="content">
             <div class="create-model">
-            <div class="nav-links">
-                <div id="projectid" style="display:none;">${projectid}</div>
-                <a href="${pageContext.request.contextPath}/${project}">${project}</a>
-            </div>
             <h1>Create new Workpackage</h1>
                 <form action="${pageContext.request.contextPath}/CreateWorkpackageServlet" method="get">
                     <table class="create-table">
                         <tr>
                             <td>Workpackage Name:</td>
                             <td><input type="text" name="workpackage-name"/></td>
+                        </tr>
+                        <tr>
+                            <td>Project Name:</td>
+                            <td><input type="text" name="project-name"/></td>
                         </tr>
                         <tr>
                             <td>Deadline:</td>
@@ -58,7 +58,7 @@
                     </table>
                     <button type="submit" class="create-button">Create</button>
                 </form>
-                <form action="${pageContext.request.contextPath}/${project}">
+                <form action="${pageContext.request.contextPath}/indexServlet" method="get">
                 	<button class="cancel-button">Cancel</button>
             	</form>
             </div>

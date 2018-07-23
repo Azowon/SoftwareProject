@@ -354,7 +354,7 @@ public class StatementCreator {
 	 */
 	public void insertWorkpackage(Workpackage w)
 	{
-		String statement="INSERT INTO project VALUES (DEFAULT,\'"+w.getName()+"\',\'"
+		String statement="INSERT INTO workpackage VALUES (DEFAULT,\'"+w.getName()+"\',\'"
 				+w.getDescription()+"\',\'"+w.getDeadline().toString()+"\',\'"+w.getProjectId()+"\')";
 		
 		try 

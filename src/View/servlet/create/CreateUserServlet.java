@@ -35,6 +35,7 @@ public class CreateUserServlet extends HttpServlet implements INavigationBar{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req=request;
+		sh = new ServletHelper();
 		if(request.getSession().getAttribute("username")==null)
 		{
 			RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
@@ -56,7 +57,7 @@ public class CreateUserServlet extends HttpServlet implements INavigationBar{
 			view.forward(req, response);
 		}*/
 		setNavigationBar();
-		RequestDispatcher view = request.getRequestDispatcher("jsp/CreateUserFormServlet.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/CreateUserFormServlet");
 		view.forward(req, response);
 	}
 
@@ -68,7 +69,7 @@ public class CreateUserServlet extends HttpServlet implements INavigationBar{
 	}
 	
 	private boolean insertUser() {
-       sh = new ServletHelper();
+       
        String role=(String) req.getParameter("user-role");
        String firstname=(String) req.getParameter("user-firstname");
        String lastname=(String) req.getParameter("user-lastname");

@@ -1,5 +1,7 @@
 package View.servlet.contentobjects;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import Model.Project;
@@ -30,6 +32,42 @@ public class ServletHelper {
 		{
 			return false;
 		}
+	}
+	
+	public boolean createWorkpackage(String name, String description, String deadline, long projectId)
+	{
+		try
+		{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsedDate = formatter.parse(deadline);
+			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
+			Workpackage w=new Workpackage(-1, name, description, sqlDate, projectId);
+			st.insertWorkpackage(w);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+	}
+	
+	public boolean createTask(String name, String description, String deadline,double timePlanned, long workpackageId,long userId)
+	{
+		try
+		{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsedDate = formatter.parse(deadline);
+			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
+			Task t=new Task(-1, name, description, sqlDate,"open",0,timePlanned,workpackageId,userId );
+			st.insertTask(t);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
 	}
 	
 	public boolean deleteUser(String username)
@@ -179,5 +217,23 @@ public class ServletHelper {
 				.build();
 		
 		return t;
+	}
+
+	public long getProjectId(String projectName) {
+		long k=0;
+		k=st.selectProjectsWhere("name='"+projectName+"'").get(0).getId();
+		return k;
+	}
+
+	public long getWorkpackageId(String wpName) {
+		long k=0;
+		k=st.selectWorkpackageWhere("name='"+wpName+"'").get(0).getId();
+		return k;
+	}
+	
+	public long getUserId(String username) {
+		long k=0;
+		k=st.selectUsersWhere("username='"+username+"'").get(0).getId();
+		return k;
 	}
 }

@@ -35,15 +35,9 @@
             </div>
         </div>
         <div class="content">
-            <div class="create-model">
-                <div class="nav-links">
-                	<div id="projectid" style="display:none;">${projectid}</div>
-                    <a href="${pageContext.request.contextPath}/${project}">${project}</a> -
-                	<div id="workpackageid" style="display:none;">${workpackageid}</div>
-                    <a href="${pageContext.request.contextPath}/${workpackage}">${workpackage}</a>
-                </div>
+            <div class="create-model">             
                 <h1>Create new Task</h1>
-                <form>
+                <form action="${pageContext.request.contextPath}/CreateTaskServlet" method="get">
                     <table class="create-table">
                         <tr>
                             <td>Task Name: </td>
@@ -52,6 +46,10 @@
                         <tr>
                             <td>Deadline: </td>
                             <td><input type="date" name="task-deadline"/></td>
+                        </tr>
+                        <tr>
+                            <td>Workpackage Name: </td>
+                            <td><input type="date" name="workpackage-name"/></td>
                         </tr>
                         <tr>
                             <td>Time: </td>
@@ -64,7 +62,7 @@
                     </table>
                     <button type="submit" class="create-button">Create</button>
                 </form>
-				<form action="${pageContext.request.contextPath}/${workproject}">
+				<form action="${pageContext.request.contextPath}/indexServlet" method="get">
                 	<button class="cancel-button">Cancel</button>
             	</form>
             </div>

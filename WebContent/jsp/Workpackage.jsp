@@ -58,7 +58,7 @@
                     <table class="overview-table">
                         ${tasks}
                     </table>
-                    <form type="submit" action="NewTask.html" method="get">
+                    <form type="submit" action="${pageContext.request.contextPath}/CreateTaskFormServlet" method="get">
                         <button class="create-new-button">Create new Task</button>
                     </form>
                 </div>
