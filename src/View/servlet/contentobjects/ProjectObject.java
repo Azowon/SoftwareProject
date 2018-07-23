@@ -71,7 +71,7 @@ public class ProjectObject {
 		for(Workpackage w : workpackages)
 		{
 			String timeContent=this.wpTimes.get(w.getId());
-			res+="<tr><td><a href='/SoftwareProject/WorkpackageServlet?id="+w.getId()+"'>"+w.getName()+"1</a></td><td>"
+			res+="<tr><td><a href='/SoftwareProject/WorkpackageServlet?id="+w.getId()+"'>"+w.getName()+"</a></td><td>"
 					+w.getDeadline().toString()+"</td><td class='spleft'>"+timeContent+"</td>"
 							+ "<td>"+w.getDescription()+"</td></tr>";
 		}

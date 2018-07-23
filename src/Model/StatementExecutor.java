@@ -10,7 +10,7 @@ import Util.Logger;
  *
  */
 public class StatementExecutor {
-	
+	private static IConnectionInstance conn;
 	
 	/**
 	 * Executes SQL statement with return values
@@ -22,8 +22,14 @@ public class StatementExecutor {
 	public static ResultSet executeQuery(String statement, String databaseType) throws SQLException
 	{
 		PreparedStatement p = getStatement(statement, databaseType);
-		
-		return p.executeQuery();
+		try
+		{
+			return p.executeQuery();
+		}
+		finally
+		{
+			conn.freeConnection();
+		}
 	}
 	
 	/**
@@ -37,12 +43,15 @@ public class StatementExecutor {
 		PreparedStatement p = getStatement(statement, databaseType);
 		
 		p.executeUpdate();
+		
+		closeConnection();
+		
 	}
 	
 	private static PreparedStatement getStatement(String statement, String databaseType) throws SQLException
 	{
 		ConnectionFactory connFactory=new ConnectionFactory();
-		IConnectionInstance conn=null;
+		conn=null;
 		try {
 			conn = connFactory.getConnection(databaseType);
 		} catch (NoSuchDatabaseException e) {
@@ -51,5 +60,10 @@ public class StatementExecutor {
 		
 		PreparedStatement p = conn.getDatabaseConnection().prepareStatement(statement);
 		return p;
+	}
+	
+	private static void closeConnection()
+	{
+		conn.freeConnection();
 	}
 }

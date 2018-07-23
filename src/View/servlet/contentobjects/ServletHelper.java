@@ -34,6 +34,45 @@ public class ServletHelper {
 		}
 	}
 	
+	public boolean createProject(String name, String description, String deadline)
+	{
+		try
+		{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsedDate = formatter.parse(deadline);
+			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
+			Project p=new Project(-1, name, description, sqlDate);
+			st.insertProject(p);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+	}
+	
+	public boolean editProject(String name, String description, String deadline)
+	{
+		try
+		{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsedDate = formatter.parse(deadline);
+			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
+			Project p=st.selectProjectsWhere("name='"+name+"'").get(0);
+			p.setDeadline(sqlDate);
+			p.setDescription(description);
+			p.setName(name);
+			st.updateProject(p);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+	}
+	
 	public boolean createWorkpackage(String name, String description, String deadline, long projectId)
 	{
 		try
@@ -166,7 +205,7 @@ public class ServletHelper {
 			nbo.addProjectContent("/SoftwareProject/ProjectServlet?id="+p.getId(), p.getName());
 		}
 		
-		nbo.addProjectContent("/SoftwareProject/CreateProjectFormServlet", "Create Project");
+		nbo.addProjectContent("/SoftwareProject/CreateProjectFormServlet", "Create or Edit Project");
 		
 			
 		for(Project p: projects)
@@ -339,7 +378,11 @@ public class ServletHelper {
 
 	public long getProjectId(String projectName) {
 		long k=0;
-		k=st.selectProjectsWhere("name='"+projectName+"'").get(0).getId();
+		try
+		{
+			k=st.selectProjectsWhere("name='"+projectName+"'").get(0).getId();
+		}
+		catch(Exception e) {}
 		return k;
 	}
 

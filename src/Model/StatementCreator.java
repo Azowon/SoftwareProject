@@ -103,8 +103,8 @@ public class StatementCreator {
 						res.getString("firstname"),
 						res.getString("lastname"),
 						res.getString("description"),
-						res.getString("team"),
-						res.getString("role")
+						res.getString("role"),
+						res.getString("team")						
 						));
 			}
 		} 
@@ -373,7 +373,7 @@ public class StatementCreator {
 	 */
 	public void updateWorkpackage(Workpackage w)
 	{
-		String statement="UPDATE project SET name=\'"+w.getName()+"\',description=\'"+w.getDescription()
+		String statement="UPDATE workpackage SET name=\'"+w.getName()+"\',description=\'"+w.getDescription()
 				+"\',deadline=\'"+w.getDeadline().toString()+"\',project_id=\'"+w.getProjectId()+"\' where workpackage_id="+w.getId();
 		
 		try 
@@ -533,7 +533,7 @@ public class StatementCreator {
 	 */
 	public void updateTask(Task t)
 	{
-		String statement="UPDATE project SET name=\'"+t.getName()+"\',description=\'"+t.getDescription()
+		String statement="UPDATE task SET name=\'"+t.getName()+"\',description=\'"+t.getDescription()
 				+"\',deadline=\'"+t.getDeadline().toString()+"\',status=\'"+t.getStatus()+"\',time_booked=\'"+t.getTimeBooked()
 				+"\',time_planned=\'"+t.getTimePlanned()+"\',workpackage_id=\'"+t.getWorkpackageId()
 				+"\',assigned_user_id=\'"+t.getUserId()+"\' where task_id="+t.getId();

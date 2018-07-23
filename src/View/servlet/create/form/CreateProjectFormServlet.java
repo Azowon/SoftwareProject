@@ -36,6 +36,13 @@ public class CreateProjectFormServlet extends HttpServlet implements INavigation
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		req = request;
+		
+		if(request.getSession().getAttribute("username")==null)
+		{
+			RequestDispatcher view = req.getRequestDispatcher("jsp/LoginPage.jsp");
+			view.forward(req, response);
+		}
+		
 		configureJSP();
 		
 		RequestDispatcher view = req.getRequestDispatcher("jsp/createProject.jsp");

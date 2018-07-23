@@ -63,7 +63,6 @@ public class CreateWorkpackageServlet extends HttpServlet implements INavigation
 		if(projectId<1)
 			return false;
 		
-		//TODO fix
 		if(wpId<1)
 		{
 			return sh.createWorkpackage(name, description, deadline, projectId);

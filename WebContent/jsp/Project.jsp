@@ -62,8 +62,7 @@
                     <div class="description">
                         ${description}
                     </div>
-                    <button class="edit-button" onclick="window.location.href = 'EditProject.html'">Edit Project</button>
-                </div>
+                    </div>
                 <div id="project-workpackages">
                     <table class="overview-table">
                         ${workpackages}

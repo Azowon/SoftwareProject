@@ -67,7 +67,7 @@
                             <td><textarea rows="5" cols="50" name="workpackage-description"></textarea></td>
                         </tr>
                     </table>
-                    <button type="submit" class="create-button">Create</button>
+                    <button type="submit" class="create-button">Create or Edit</button>
                 </form>
                 <form action="${pageContext.request.contextPath}/indexServlet" method="get">
                 	<button class="cancel-button">Cancel</button>

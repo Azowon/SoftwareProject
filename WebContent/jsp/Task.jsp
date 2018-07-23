@@ -70,8 +70,7 @@
                     <div class="description">
                         Description: ${description}
                     </div>
-                    <button class="edit-button" onclick="window.location.href = 'EditTask.html'">Edit Task</button>
-                </div>
+                     </div>
             </div>
             <div id="my-tasks">
                 <table>
