@@ -24,6 +24,11 @@
                     ${heatmapcontent}
                 </div>
             </div>
+            <div id="logoutdiv">
+            	<form action="${pageContext.request.contextPath}/LogoutServlet" method="post">
+            		<button class="logout-button">Logout</button>
+            	</form>
+            </div>
             <div id="udiv">
             	<form action="${userpath}" method="post">
                 	<button class="user-config-button">${username}</button>

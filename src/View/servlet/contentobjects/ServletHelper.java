@@ -166,6 +166,8 @@ public class ServletHelper {
 			nbo.addProjectContent("/SoftwareProject/ProjectServlet?id="+p.getId(), p.getName());
 		}
 		
+		nbo.addProjectContent("/SoftwareProject/CreateProjectFormServlet", "Create Project");
+		
 			
 		for(Project p: projects)
 		{
