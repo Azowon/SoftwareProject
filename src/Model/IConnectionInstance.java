@@ -11,5 +11,5 @@ public interface IConnectionInstance {
 	
 	public Connection getDatabaseConnection();
 	
-	
+	public void freeConnection();
 }
