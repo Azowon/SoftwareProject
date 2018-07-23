@@ -17,10 +17,9 @@ import View.servlet.interfaces.INavigationBar;
  * Servlet implementation class DeleteUserServlet
  */
 @WebServlet("/DeleteUserServlet")
-public class DeleteUserServlet extends HttpServlet implements INavigationBar {
+public class DeleteUserServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private HttpServletRequest req;
-	private NavigationBarObject nbo;
 	private ServletHelper sh;
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,7 +39,6 @@ public class DeleteUserServlet extends HttpServlet implements INavigationBar {
 			view.forward(req, response);
 		}
 		sh=new ServletHelper();
-		setNavigationBar();
 		if(sh.checkAdminPrivilege((String)req.getSession().getAttribute("username")))
 		{
 			//TODO add error case
@@ -61,15 +59,4 @@ public class DeleteUserServlet extends HttpServlet implements INavigationBar {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
-	@Override
-	public void setNavigationBar() {
-		nbo=sh.getNavigationBar();
-		String projectContent = nbo.getProjectContent();
-		String logo = nbo.getLogoPath();
-		
-		req.setAttribute("projectcontent", projectContent);
-		req.setAttribute("logo", logo);
-	}
-
 }

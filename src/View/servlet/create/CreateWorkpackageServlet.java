@@ -43,6 +43,8 @@ public class CreateWorkpackageServlet extends HttpServlet implements INavigation
 		}
 		
 		sh=new ServletHelper();
+		nbo = sh.getNavigationBar();
+		
 		createWorkpackage();
 		
 		RequestDispatcher view = request.getRequestDispatcher("/indexServlet");
@@ -77,11 +79,12 @@ public class CreateWorkpackageServlet extends HttpServlet implements INavigation
 	 */
 	@Override
 	public void setNavigationBar() {
-		nbo=sh.getNavigationBar();
 		String projectContent = nbo.getProjectContent();
+		String heatmapContent = nbo.getHeatmapContent();
 		String logo = nbo.getLogoPath();
 		
 		req.setAttribute("projectcontent", projectContent);
+		req.setAttribute("heatmapcontent", heatmapContent);
 		req.setAttribute("logo", logo);
 	}
 

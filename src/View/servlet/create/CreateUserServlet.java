@@ -17,10 +17,9 @@ import View.servlet.interfaces.INavigationBar;
  * Servlet implementation class CreateUserServlet
  */
 @WebServlet("/CreateUserServlet")
-public class CreateUserServlet extends HttpServlet implements INavigationBar{
+public class CreateUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HttpServletRequest req;
-	private NavigationBarObject nbo;
     private ServletHelper sh;
        
     /**
@@ -56,7 +55,6 @@ public class CreateUserServlet extends HttpServlet implements INavigationBar{
 			RequestDispatcher view = request.getRequestDispatcher("jsp/CreateUserFormServlet.jsp");
 			view.forward(req, response);
 		}*/
-		setNavigationBar();
 		RequestDispatcher view = request.getRequestDispatcher("/CreateUserFormServlet");
 		view.forward(req, response);
 	}
@@ -80,17 +78,4 @@ public class CreateUserServlet extends HttpServlet implements INavigationBar{
        
        return sh.createUser(role, firstname, lastname, username, password, team, description);
 	}
-	
-
-	@Override
-	public void setNavigationBar() {
-		nbo=sh.getNavigationBar();
-		String projectContent = nbo.getProjectContent();
-		String logo = nbo.getLogoPath();
-		
-		req.setAttribute("projectcontent", projectContent);
-		req.setAttribute("logo", logo);
-	}
-
-
 }
