@@ -36,14 +36,6 @@
         </div>
         <div class="content">
             <div class="create-model">
-                <div class="nav-links">
-                	<div id="projectid" style="display:none;">${projectid}</div>
-                    <a href="${pageContext.request.contextPath}/${project}">${project}</a> -
-                	<div id="workpackageid" style="display:none;">${projectid}</div>
-                	<a href="${pageContext.request.contextPath}/${workpackage}">${workpackage}</a> -
-                	<div id="taskid" style="display:none;">${taskid}</div>
-                	<a href="${pageContext.request.contextPath}/${task}">${task}</a>
-            	</div>
                 <h1>Edit Task</h1>
                 <form action="void()" method="get">
                     <table class="create-table">
@@ -66,7 +58,7 @@
                     </table>
                     <button type="submit" class="apply-button">Apply</button>
                 </form>
-                <form action="${pageContext.request.contextPath}/${task}">
+                <form action="${pageContext.request.contextPath}/indexServlet" method="get">
                 	<button class="cancel-button">Cancel</button>
             	</form>
             </div>

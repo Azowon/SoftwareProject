@@ -58,7 +58,7 @@
                         ${workpackages}
                     </table>
                     <form type="submit" action="${pageContext.request.contextPath}/CreateWorkpackageFormServlet" method="get">
-                    	<button class="create-new-button">Create new Workpackage</button>
+                    	<button class="create-new-button">Create or edit a Workpackage</button>
                     </form>
                 </div>
             </div>

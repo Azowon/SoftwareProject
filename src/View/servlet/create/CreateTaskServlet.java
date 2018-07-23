@@ -49,14 +49,25 @@ public class CreateTaskServlet extends HttpServlet {
 		String description=(String) req.getParameter("task-description");
 		String deadline=(String) req.getParameter("task-deadline");
 		String wpName=(String) req.getParameter("workpackage-name");
+		String status=(String) req.getParameter("task-status");
 		double time=Double.parseDouble((String) req.getParameter("task-time"));
+		double timeBooked=Double.parseDouble((String) req.getParameter("task-booked"));
 		
 		long wpId=sh.getWorkpackageId(wpName);
 		long userId=sh.getUserId((String)req.getSession().getAttribute("username"));
-		
+		long taskId=sh.getTaskId(name);
 		if(wpId<1|userId<1)
 			return false;
-		return sh.createTask(name, description, deadline, time, wpId, userId);
+		
+		//TODO fix
+		if(taskId<1)
+		{
+			return sh.createTask(name, description, deadline,timeBooked, time,status, wpId, userId);
+		}
+		else
+		{
+			return sh.editTask(name, description, deadline,timeBooked, time,status, wpId, userId);
+		}
 		
 		
 		

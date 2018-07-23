@@ -36,7 +36,7 @@
         </div>
         <div class="content">
             <div class="create-model">
-            <h1>Create new Workpackage</h1>
+            <h1>Create or edit a Workpackage</h1>
                 <form action="${pageContext.request.contextPath}/CreateWorkpackageServlet" method="get">
                     <table class="create-table">
                         <tr>

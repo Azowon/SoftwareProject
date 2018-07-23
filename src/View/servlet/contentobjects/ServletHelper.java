@@ -52,15 +52,62 @@ public class ServletHelper {
 		
 	}
 	
-	public boolean createTask(String name, String description, String deadline,double timePlanned, long workpackageId,long userId)
+	public boolean editWorkpackage(String name, String description, String deadline, long projectId)
 	{
 		try
 		{
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date parsedDate = formatter.parse(deadline);
 			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
-			Task t=new Task(-1, name, description, sqlDate,"open",0,timePlanned,workpackageId,userId );
+			Workpackage w=st.selectWorkpackageWhere("workpackage_id="+this.getWorkpackageId(name)).get(0);
+			w.setDeadline(sqlDate);
+			w.setDescription(description);
+			w.setName(name);
+			w.setProjectId(projectId);
+			st.updateWorkpackage(w);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+	}
+	
+	public boolean createTask(String name, String description, String deadline,double timeBooked,double timePlanned,String status, long workpackageId,long userId)
+	{
+		try
+		{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsedDate = formatter.parse(deadline);
+			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
+			Task t=new Task(-1, name, description, sqlDate,status,timeBooked,timePlanned,workpackageId,userId );
 			st.insertTask(t);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+	}
+	
+	public boolean editTask(String name, String description, String deadline,double timeBooked,double timePlanned,String status, long workpackageId,long userId)
+	{
+		try
+		{
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date parsedDate = formatter.parse(deadline);
+			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
+			Task t=st.selectTaskWhere("task_id="+this.getTaskId(name)).get(0);
+			t.setDeadline(sqlDate);
+			t.setDescription(description);
+			t.setName(name);
+			t.setStatus(status);
+			t.setTimeBooked(timeBooked);
+			t.setTimePlanned(timePlanned);
+			t.setWorkpackageId(workpackageId);
+			st.updateTask(t);
 			return true;
 		}
 		catch(Exception e)
@@ -227,13 +274,31 @@ public class ServletHelper {
 
 	public long getWorkpackageId(String wpName) {
 		long k=0;
-		k=st.selectWorkpackageWhere("name='"+wpName+"'").get(0).getId();
+		try
+		{
+			k=st.selectWorkpackageWhere("name='"+wpName+"'").get(0).getId();
+		}
+		catch(Exception e) {}
+		return k;
+	}
+	
+	public long getTaskId(String taskName) {
+		long k=0;
+		try
+		{
+			k=st.selectTaskWhere("name='"+taskName+"'").get(0).getId();
+		}
+		catch(Exception e) {}
 		return k;
 	}
 	
 	public long getUserId(String username) {
 		long k=0;
-		k=st.selectUsersWhere("username='"+username+"'").get(0).getId();
+		try 
+		{
+			k=st.selectUsersWhere("username='"+username+"'").get(0).getId();
+		}
+		catch(Exception e) {}
 		return k;
 	}
 }

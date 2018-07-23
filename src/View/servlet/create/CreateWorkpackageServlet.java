@@ -57,10 +57,19 @@ public class CreateWorkpackageServlet extends HttpServlet implements INavigation
 		String projectName=(String) req.getParameter("project-name");
 		
 		long projectId=sh.getProjectId(projectName);
+		long wpId=sh.getWorkpackageId(name);
 		if(projectId<1)
 			return false;
 		
-		return sh.createWorkpackage(name, description, deadline, projectId);
+		//TODO fix
+		if(wpId<1)
+		{
+			return sh.createWorkpackage(name, description, deadline, projectId);
+		}
+		else
+		{
+			return sh.editWorkpackage(name, description, deadline, projectId);
+		}
 	}
 	
 	/**

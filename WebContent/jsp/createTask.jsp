@@ -36,7 +36,7 @@
         </div>
         <div class="content">
             <div class="create-model">             
-                <h1>Create new Task</h1>
+                <h1>Create or edit a Task</h1>
                 <form action="${pageContext.request.contextPath}/CreateTaskServlet" method="get">
                     <table class="create-table">
                         <tr>
@@ -52,8 +52,16 @@
                             <td><input type="date" name="workpackage-name"/></td>
                         </tr>
                         <tr>
-                            <td>Time: </td>
+                            <td>Time Booked: </td>
+                            <td><input type="text" name="task-booked"/></td>
+                        </tr>
+                        <tr>
+                            <td>Time Planned: </td>
                             <td><input type="text" name="task-time"/></td>
+                        </tr>
+                        <tr>
+                            <td>Status: </td>
+                            <td><input type="text" name="task-status"/></td>
                         </tr>
                         <tr>
                             <td>Description: </td>
