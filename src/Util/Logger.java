@@ -32,7 +32,7 @@ public class Logger {
 	private static File getFile()
 	{
 		
-		String s = "C:\\Log.txt";
+		String s = "C:\\Users\\ralbi\\Log.txt";
 		File f=null;
 		try
 		{

@@ -19,6 +19,50 @@ public class ServletHelper {
 		return generateNavigationBar();
 	}
 	
+	public boolean checkAdminPrivilege(String username)
+	{
+		try
+		{
+			User u=st.selectUsersWhere("username='"+username+"'").get(0);
+			return u.getRole().toLowerCase().equals("admin");
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+	}
+	
+	public boolean deleteUser(String username)
+	{
+		try
+		{
+			User u=st.selectUsersWhere("username='"+username+"'").get(0);
+			st.deleteUser(u);
+			st.deletePassword(username);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+	}
+	
+	public boolean createUser(String role, String firstname, String lastname, String username, String password, String team, String description)
+	{
+		if(role==null|firstname==null|lastname==null|username==null|password==null|team==null)
+		{
+			return false;
+		}
+		else
+		{
+			User u=new User(-1,username,firstname,lastname,description,role,team);
+			st.insertUser(u);
+			st.savePassword(username, password);
+			return true;
+		}
+	}
+	
 	public boolean checkLogin(String username, String password)
 	{
 		if(username==null) return false;

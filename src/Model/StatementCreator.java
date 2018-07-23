@@ -451,7 +451,7 @@ public class StatementCreator {
 		try 
 		{
 			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM users in_task, task WHERE users_in_task.task_id=task.task_id AND users_in_task.user_id="+userId,"Regular");
-			
+	
 			while(res.next())
 			{
 				tasks.add(new Task(
@@ -759,6 +759,22 @@ public class StatementCreator {
 		{
 			StatementExecutor.executeUpdate("INSERT INTO authentication VALUES (\'"+username+"\',\'"+pwHash+"\')","Password");
 		} 
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Deletes password entry for user
+	 * @param username username of user
+	 */
+	public void deletePassword(String username)
+	{
+		try
+		{
+			StatementExecutor.executeUpdate("DELETE FROM authentication WHERE username='"+username+"'", "Password");
+		}
 		catch (SQLException e) 
 		{
 			Logger.log(e.getMessage());

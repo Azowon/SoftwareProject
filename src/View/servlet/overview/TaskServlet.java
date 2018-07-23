@@ -48,19 +48,19 @@ public class TaskServlet extends HttpServlet implements INavigationBar, IMyTasks
 			view.forward(req, response);
 			return;
 		}
-		configureJSP(request, response);
+		configureJSP();
 		
 		RequestDispatcher view = req.getRequestDispatcher("jsp/Task.jsp");
 		view.forward(request, response);
 	}
 	
 	//Extra Method to configure jsp which will be forwarded to
-	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
+	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks((String)req.getSession().getAttribute("username"));
         
-        long taskId=Long.parseLong(request.getQueryString().split("=")[1]);
+        long taskId=Long.parseLong(req.getQueryString().split("=")[1]);
         t=sh.getTask(taskId);
         
 		setMyTasks();

@@ -49,18 +49,18 @@ public class ProjectServlet extends HttpServlet implements INavigationBar, IMyTa
 			view.forward(req, response);
 		}
 		
-		configureJSP(request, response);
+		configureJSP();
 		
 		RequestDispatcher view = req.getRequestDispatcher("jsp/Project.jsp");
 		view.forward(req, response);
 	}
 	
-	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
+	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks((String)req.getSession().getAttribute("username"));
         
-        long projectId=Long.parseLong(request.getQueryString().split("=")[1]);
+        long projectId=Long.parseLong(req.getQueryString().split("=")[1]);
         po=sh.getProject(projectId);
         
 		setMyTasks();

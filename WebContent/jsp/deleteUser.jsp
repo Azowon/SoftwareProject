@@ -37,10 +37,10 @@
         <div class="content">
             <div id="users-delete">
                 <h1>Delete User</h1>
-                <form action="void()" method="get">
+                <form action="${pageContext.request.contextPath}/DeleteUserServlet" method="get">
                     <label>Username: </label>
                     <input type="text" name="username" id="username"/>
-                    <button type="submit" class="search-button">Search</button>
+                    <button type="submit" class="search-button">Delete</button>
                 </form>
             </div>
         </div>

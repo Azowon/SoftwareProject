@@ -29,7 +29,7 @@ public class WorkpackageObject {
 	}
 
 	public void setNameLink() {
-		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + " </a>";
+		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + "</a>";
 	}
 	
 

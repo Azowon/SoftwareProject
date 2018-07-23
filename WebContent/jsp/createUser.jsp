@@ -38,7 +38,7 @@
         <div class="content">
             <div class="edit-model">
                 <h1>Create new User</h1>
-                <form action="void()" method="get">
+                <form action="${pageContext.request.contextPath}/CreateUserServlet" method="get">
                     <table class="edit-table">
                         <tr>
                             <td>Role:</td>
@@ -58,6 +58,14 @@
                             <td><input type="text" name="user-lastname"/></td>
                         </tr>
                         <tr>
+                            <td>Username:</td>
+                            <td><input type="text" name="user-username"/></td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td><input type="password" name="user-password"/></td>
+                        </tr>   
+                        <tr>
                             <td>Team:</td>
                             <td><input type="text" name="user-team"/></td>
                         </tr>
@@ -65,11 +73,17 @@
                             <td>Description:</td>
                             <td><textarea rows="5" cols="50" name="user-description"></textarea></td>
                         </tr>
-                    </table>
-                    <form action="${pageContext.request.contextPath}/indexServlet" method="get">
-                		<button class="cancel-button">Cancel</button>
-            		</form>
+                        <tr>
+                        	<td></td>
+                        	<td><input type="submit" value="Create"></td>
+                        	<td><form action="${pageContext.request.contextPath}/indexServlet" method="get">
+                					<button class="cancel-button">Cancel</button>
+            					</form>
+            				</td>
+                        </tr>
+                    </table>                    
                 </form>
+                
             </div>
         </div>
     </body>

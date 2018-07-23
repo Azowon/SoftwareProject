@@ -48,18 +48,18 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 			return;
 		}
 		
-		configureJSP(request, response);
+		configureJSP();
 		
 		RequestDispatcher view = req.getRequestDispatcher("jsp/Workpackage.jsp");
 		view.forward(request, response);
 	}
 
-	private void configureJSP(HttpServletRequest request, HttpServletResponse response) {
+	private void configureJSP() {
         sh = new ServletHelper();
         nbo = sh.getNavigationBar();
         mto = sh.getMyTasks((String)req.getSession().getAttribute("username"));
 
-        long workpackageId=Long.parseLong(request.getQueryString().split("=")[1]);
+        long workpackageId=Long.parseLong(req.getQueryString().split("=")[1]);
         wp = sh.getWorkpackage(workpackageId);
              
 		setMyTasks();
