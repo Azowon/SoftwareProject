@@ -57,6 +57,18 @@ public class RegularConnectionInstance implements IConnectionInstance{
 	public Connection getDatabaseConnection() {
 		return databaseConnection;
 	}
+	
+	/**
+	 * closes Connection
+	 */
+	public void freeConnection()
+	{
+		try {
+			databaseConnection.close();
+		} catch (SQLException e) {
+			Logger.log(e.getMessage());
+		}
+	}
 
 	/**
 	 * Sets database connection
