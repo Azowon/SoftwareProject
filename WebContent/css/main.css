@@ -169,6 +169,25 @@ body {
     border: none;
 }
 
+/* logout button in navigation bar */
+#logoutdiv {
+    float: right;
+}
+
+#logoutdiv:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.logout-button {
+    background-color: dodgerblue;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
 .spleft {
     text-align: right;
 }
@@ -192,7 +211,7 @@ body {
 
 .user-config-button:hover {background-color: deepskyblue;}
 
-
+.logout-button:hover {background-color: deepskyblue;}
 
 
 /* ###############
