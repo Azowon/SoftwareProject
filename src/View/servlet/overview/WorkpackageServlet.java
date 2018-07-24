@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import View.servlet.contentobjects.MyTasksObject;
 import View.servlet.contentobjects.NavigationBarObject;
-import View.servlet.contentobjects.ServletHelper;
 import View.servlet.contentobjects.WorkpackageObject;
 import View.servlet.interfaces.IMyTasks;
 import View.servlet.interfaces.INavigationBar;
+import View.servlet.util.ServletHelper;
 
 
 /**
@@ -102,6 +102,7 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		String desc = wp.getDescription();
 		String time = wp.getTime();
 		String tasks = wp.getTasks();
+		long workpackageid = wp.getId();
 		
 		req.setAttribute("Name", name);
 		req.setAttribute("workpackagelink", nameLink);
@@ -110,6 +111,7 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		req.setAttribute("description", desc);
 		req.setAttribute("time", time);
 		req.setAttribute("tasks", tasks);
+		req.setAttribute("workpackageid", workpackageid);
 	}
 	
 	/**

@@ -9,6 +9,7 @@ public class WorkpackageObject {
 	private String name;
 	private long id;
 	private String nameLink;
+	private long projectId;
 	private String projectName;
 	private String projectNameLink;
 	private String description;
@@ -40,6 +41,13 @@ public class WorkpackageObject {
 		this.nameLink = "<a href='/SoftwareProject/WorkpackageServlet?id="+this.id+"'>" + this.name + "</a>";
 	}
 	
+	public long getProjectId() {
+		return projectId;
+	}
+	
+	public void setProjectId() {
+		this.projectId = projectId;
+	}
 
 	public String getProjectName() {
 		return projectName;

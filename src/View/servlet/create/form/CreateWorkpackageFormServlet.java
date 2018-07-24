@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import View.servlet.contentobjects.NavigationBarObject;
-import View.servlet.contentobjects.ServletHelper;
 import View.servlet.interfaces.INavigationBar;
+import View.servlet.util.ServletHelper;
 
 /**
  * Servlet implementation class CreateWorkpackageFormServlet
@@ -86,10 +86,7 @@ public class CreateWorkpackageFormServlet extends HttpServlet implements INaviga
 	 * Set link to project of workpackage
 	 */
 	public void setProject() {
-		//TO DO PROJECT VOM WORKPACKAGE HERAUSFINDEN
-		
-		String project = "ProjectServlet";
-		req.setAttribute("project", project);
+		req.setAttribute("projectid", req.getParameter("projectid"));
 	}
 
 	/**

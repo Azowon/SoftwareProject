@@ -69,9 +69,7 @@
                     </table>
                     <button type="submit" class="create-button">Create or Edit</button>
                 </form>
-                <form action="${pageContext.request.contextPath}/indexServlet" method="get">
-                	<button class="cancel-button">Cancel</button>
-            	</form>
+                <input class="cancel-button" type="button" value="Cancel" onclick="window.location.href='${pageContext.request.contextPath}/ProjectServlet?id=${projectid}'" />
             </div>
         </div>
     </body>

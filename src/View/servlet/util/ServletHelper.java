@@ -1,4 +1,4 @@
-package View.servlet.contentobjects;
+package View.servlet.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,6 +9,13 @@ import Model.StatementCreator;
 import Model.Task;
 import Model.User;
 import Model.Workpackage;
+import View.servlet.contentobjects.HeatmapProjectObject;
+import View.servlet.contentobjects.HeatmapWorkpackageObject;
+import View.servlet.contentobjects.MyTasksObject;
+import View.servlet.contentobjects.NavigationBarObject;
+import View.servlet.contentobjects.ProjectObject;
+import View.servlet.contentobjects.TaskObject;
+import View.servlet.contentobjects.WorkpackageObject;
 import View.servlet.contentobjects.objectbuilder.ProjectObjectBuilder;
 import View.servlet.contentobjects.objectbuilder.TaskObjectBuilder;
 import View.servlet.contentobjects.objectbuilder.WorkpackageObjectBuilder;

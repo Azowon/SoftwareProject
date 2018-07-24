@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import View.servlet.contentobjects.MyTasksObject;
 import View.servlet.contentobjects.NavigationBarObject;
 import View.servlet.contentobjects.ProjectObject;
-import View.servlet.contentobjects.ServletHelper;
 import View.servlet.interfaces.IMyTasks;
 import View.servlet.interfaces.INavigationBar;
+import View.servlet.util.ServletHelper;
 
 
 

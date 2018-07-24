@@ -49,8 +49,7 @@
             <div class="overview-content">
                 <div id="workpackage-desc">
                     <div class="nav-links">
-                        ${projectlink} -
-                        ${workpackagelink}
+                        ${projectlink}
                     </div>
                     <h1>${name}</h1>
                     <div class="story-points">
@@ -68,8 +67,9 @@
                     <table class="overview-table">
                         ${tasks}
                     </table>
-                    <form type="submit" action="${pageContext.request.contextPath}/CreateTaskFormServlet" method="get">
-                        <button class="create-new-button">Create or edit a Task</button>
+                    <form action="${pageContext.request.contextPath}/CreateTaskFormServlet" method="get">
+                    	<input type="hidden" name="workpackageid" value="${workpackageid}">
+                        <button class="create-new-button" type="submit">Create or edit a Task</button>
                     </form>
                 </div>
             </div>

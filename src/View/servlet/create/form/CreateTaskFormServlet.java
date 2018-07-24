@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import View.servlet.contentobjects.NavigationBarObject;
-import View.servlet.contentobjects.ServletHelper;
 import View.servlet.interfaces.INavigationBar;
+import View.servlet.util.ServletHelper;
 
 /**
  * Servlet implementation class CreateTaskFormServlet
@@ -56,6 +56,7 @@ public class CreateTaskFormServlet extends HttpServlet implements INavigationBar
 		
         setTitle();
         setNavigationBar();
+        setBackRedirect();
 	}
 	
 	/**
@@ -86,6 +87,13 @@ public class CreateTaskFormServlet extends HttpServlet implements INavigationBar
 		req.setAttribute("projectcontent", projectContent);
 		req.setAttribute("heatmapcontent", heatmapContent);
 		req.setAttribute("logo", logo);
+	}
+	
+	/**
+	 * Set up redirect to workpackage
+	 */
+	private void setBackRedirect() {
+		req.setAttribute("workpackageid", req.getParameter("workpackageid"));
 	}
 
 	/**

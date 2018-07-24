@@ -50,8 +50,7 @@
                 <div id="task-desc">
                     <div class="nav-links">
                         ${projectlink} -
-                        ${workpackagelink} -
-                    	${tasklink}
+                        ${workpackagelink}
                     </div>
                     <h1>Task 1</h1>
                     <div class="story-points">

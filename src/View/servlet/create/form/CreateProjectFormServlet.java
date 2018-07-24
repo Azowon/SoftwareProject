@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import View.servlet.contentobjects.NavigationBarObject;
-import View.servlet.contentobjects.ServletHelper;
 import View.servlet.interfaces.INavigationBar;
+import View.servlet.util.ServletHelper;
 
 /**
  * Servlet implementation class CreateProjectFormServlet
