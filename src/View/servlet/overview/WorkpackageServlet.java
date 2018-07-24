@@ -104,7 +104,7 @@ public class WorkpackageServlet extends HttpServlet implements INavigationBar, I
 		String tasks = wp.getTasks();
 		long workpackageid = wp.getId();
 		
-		req.setAttribute("Name", name);
+		req.setAttribute("name", name);
 		req.setAttribute("workpackagelink", nameLink);
 		req.setAttribute("projectlink", pNameLink);
 		req.setAttribute("deadline", deadline);

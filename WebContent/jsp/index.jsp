@@ -30,7 +30,7 @@
             	</form>
             </div>
             <div id="udiv">
-            	<form action="${userpath}" method="post">
+            	<form action="${pageContext.request.contextPath}/UserProfileServlet" method="post">
                 	<button class="user-config-button">${username}</button>
                 </form>
             </div>

@@ -60,7 +60,7 @@
                         </tr>
                         <tr>
                             <td>Workpackage Name: </td>
-                            <td><input type="date" name="workpackage-name"/></td>
+                            <td><input type="text" name="workpackage-name"/></td>
                         </tr>
                         <tr>
                             <td>Time Booked: </td>

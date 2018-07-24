@@ -49,17 +49,20 @@
             <div id="user-desc">
                 <h1>${username}</h1>
                 <div id="role">
-                    ${role}
+                    Role: ${role}
                 </div>
                 <div id="user-firstname">
-                    ${userfirstname}
+                    First name: ${userfirstname}
                 </div>
                 <div id="user-lastname">
-                    ${userlastname}
+                    Last name: ${userlastname}
+                </div>
+                <div id="team">
+                	Team: ${team}
                 </div>
                 <br>
                 <div class="user-description">
-                    ${userdescription}
+                    Description ${userdescription}
                 </div>
             </div>
         </div>

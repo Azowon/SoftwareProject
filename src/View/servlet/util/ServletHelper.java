@@ -15,6 +15,7 @@ import View.servlet.contentobjects.MyTasksObject;
 import View.servlet.contentobjects.NavigationBarObject;
 import View.servlet.contentobjects.ProjectObject;
 import View.servlet.contentobjects.TaskObject;
+import View.servlet.contentobjects.UserObject;
 import View.servlet.contentobjects.WorkpackageObject;
 import View.servlet.contentobjects.objectbuilder.ProjectObjectBuilder;
 import View.servlet.contentobjects.objectbuilder.TaskObjectBuilder;
@@ -387,6 +388,21 @@ public class ServletHelper {
 				.build();
 		
 		return t;
+	}
+	
+	public UserObject getUser(String username) {
+		User u = st.selectUsersWhere("username='"+username+"'").get(0);
+		
+		UserObject uo = new UserObject();
+		uo.setDescription(u.getDescription());
+		uo.setFirstname(u.getFirstname());
+		uo.setLastname(u.getLastname());
+		uo.setId(u.getId());
+		uo.setRole(u.getRole());
+		uo.setTeam(u.getTeam());
+		uo.setUsername(u.getUsername());
+		
+		return uo;
 	}
 
 	public long getProjectId(String projectName) {
