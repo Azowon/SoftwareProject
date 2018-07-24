@@ -80,7 +80,7 @@ public class HeatmapProjectObject {
 			WorkpackageData wd = test.getWorkpackage(w.getId());
 			
 			String timeContent=this.wpTimes.get(w.getId());
-			res+="<tr><td><a href='/SoftwareProject/HeatmapWorkpackageServlet?id="+w.getId()+"'>"+w.getName()+"1</a></td><td>"
+			res+="<tr><td><a href='/SoftwareProject/HeatmapWorkpackageServlet?id="+w.getId()+"'>"+w.getName()+"</a></td><td>"
 					+w.getDeadline().toString()+"</td><td class='spleft'>"+timeContent+"</td>"
 							+ "<td style='background-color: " + wd.getColor() + ";'></td></tr>";
 		}
