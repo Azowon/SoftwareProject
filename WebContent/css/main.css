@@ -153,6 +153,7 @@ body {
 /* user config in navigation bar*/
 #udiv {
     float: right;
+    margin-right: 15px;
 }
 
 #udiv:after {
