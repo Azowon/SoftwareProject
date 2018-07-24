@@ -45,7 +45,7 @@ public class ProjectData {
 		return timePlanned;
 	}
 	
-	public ProjectData(long ID, StatementCreator SC, Heatmap hm)
+	public ProjectData(long ID, StatementCreator SC)
 	{
 		List<Project> list = SC.selectProjectsWhere("project_id = "+ID);
 		
@@ -54,14 +54,19 @@ public class ProjectData {
 		this.deadline = list.get(0).getDeadline();
 		this.timeBooked = SC.selectTimeBookedForProject(ID);
 		this.timePlanned = SC.selectTimePlannedForProject(ID);
-		hm.setAufwand((int)timeBooked);
+		double grenzwertGrün = 0;
+		if(timePlanned != 0)
+			grenzwertGrün = timePlanned * 0.7;
+		
+		Heatmap hm = new Heatmap(grenzwertGrün, timePlanned);
+		hm.setAufwand(timeBooked);
 		color = hm.drawMap();
 		
 		List<Workpackage> workpackages = SC.selectWorkpackageWhere("project_id = " + ID);
 		
 		for(Workpackage w : workpackages)
 		{
-			workpackagesData.add(new WorkpackageData(w.getId(), SC, hm));
+			workpackagesData.add(new WorkpackageData(w.getId(), SC));
 		}
 	}
 	

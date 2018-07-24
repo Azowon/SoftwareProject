@@ -44,7 +44,7 @@ public class WorkpackageData {
 		return projectId;
 	}
 	
-	public WorkpackageData(long ID, StatementCreator SC, Heatmap hm)
+	public WorkpackageData(long ID, StatementCreator SC)
 	{
 		List<Workpackage> list = SC.selectWorkpackageWhere("workpackage_id = " + ID);
 		id = list.get(0).getId();
@@ -54,14 +54,20 @@ public class WorkpackageData {
 		projectId = list.get(0).getProjectId();
 		timeBooked = SC.selectTimeBookedForWorkpackage(ID);
 		timePlanned = SC.selectTimePlannedForWorkpackage(ID);
-		hm.setAufwand((int)timeBooked);
+		
+		double grenzwertGrün = 0;
+		if(timePlanned != 0)
+			grenzwertGrün = timePlanned * 0.7;
+		
+		Heatmap hm = new Heatmap(grenzwertGrün, timePlanned);
+		hm.setAufwand(timeBooked);
 		color = hm.drawMap();
 		
 		List<Task> liste = SC.selectTaskWhere("workpackage_id = " + ID);
 		
 		for(Task t : liste)
 		{
-			Tasks.add(new TaskData(t.getId(), SC, hm));
+			Tasks.add(new TaskData(t.getId(), SC));
 		}
 	}
 }

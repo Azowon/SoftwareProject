@@ -60,7 +60,7 @@ public class TaskData {
 	
 	
 	
-	TaskData(long ID, StatementCreator SC, Heatmap hm)
+	TaskData(long ID, StatementCreator SC)
 	{
 		List<Task> task = SC.selectTask();
 		
@@ -73,7 +73,12 @@ public class TaskData {
 		timePlanned= task.get(0).getTimePlanned();
 		workpackageId= task.get(0).getWorkpackageId();
 		userId= task.get(0).getUserId();
-		hm.setAufwand((int)timeBooked);
+		double grenzwertGrün = 0;
+		if(timePlanned != 0)
+			grenzwertGrün = timePlanned * 0.7;
+		
+		Heatmap hm = new Heatmap(grenzwertGrün, timePlanned);
+		hm.setAufwand(timeBooked);
 		color = hm.drawMap();
 		
 	}

@@ -5,7 +5,8 @@ import Model.*;
 
 public class Heatmap {
 
-	int grenzwert = 0, aufwand = 0;
+	double grenzwert = 0;
+	double aufwand = 0;
 	
 	int grenzwertGrün, grenzwertGelb;
 	
@@ -16,24 +17,25 @@ public class Heatmap {
 	
 	
 	
-	public void setAufwand(int aufwand) {
+	public void setAufwand(double aufwand) {
 		this.aufwand = aufwand;
 		currentState.checkForNextState();
-		System.out.println("Der Aufwand wurde auf " + aufwand + " gesetzt!");
+		currentState.checkForNextState();
+		//System.out.println("Der Aufwand wurde auf " + aufwand + " gesetzt!");
 	}
-	public int getAufwand() {
+	public double getAufwand() {
 		return aufwand;
 		
 	}
 	
-	public void setGrenzwerte(int grenzwertG, int grenzwertY)
+	public void setGrenzwerte(double grenzwertG, double grenzwertY)
 	{
 		s1.setGrenzwert(grenzwertG);
 		s2.setGrenzwert(grenzwertY);
 	}
 
 	
-	public Heatmap(int grenzwertGrün, int grenzwertGelb)
+	public Heatmap(double grenzwertGrün, double grenzwertGelb)
 	{
 		setGrenzwerte(grenzwertGrün, grenzwertGelb);
 		

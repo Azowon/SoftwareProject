@@ -13,14 +13,14 @@ public class Datenlieferant {
 	public ProjectData getProject(long ID)
 	{
 
-		String s = SC.selectTPoint(ID);
+		/*String s = SC.selectTPoint(ID);
 		s = "0,0";
 		String[] temp = s.split(",");
 		
 		Heatmap hm = new Heatmap(Integer.parseInt(temp[0]), Integer.parseInt(temp[1]));
+		*/
 		
-		
-		ProjectData pd = new ProjectData(ID, SC,hm);
+		ProjectData pd = new ProjectData(ID, SC);
 	
 		return pd;
 	}
@@ -28,14 +28,14 @@ public class Datenlieferant {
 	public WorkpackageData getWorkpackage(long ID)
 	{
 		
-		String s = SC.selectTPoint(SC.selectWorkpackageWhere("workpackage_id = " + ID).get(0).getProjectId());
+		/*String s = SC.selectTPoint(SC.selectWorkpackageWhere("workpackage_id = " + ID).get(0).getProjectId());
 		s = "0,2";
 		String[] temp = s.split(",");
 		
 		Heatmap hm = new Heatmap(Integer.parseInt(temp[0]), Integer.parseInt(temp[1]));
+		*/
 		
-		
-		WorkpackageData pd = new WorkpackageData(ID, SC,hm);
+		WorkpackageData pd = new WorkpackageData(ID, SC);
 	
 		return pd;
 	}

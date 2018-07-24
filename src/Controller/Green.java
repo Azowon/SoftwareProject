@@ -2,7 +2,7 @@ package Controller;
 
 public class Green extends State {
 
-	int grenzwert  = 0;
+	double grenzwert  = 0;
 	
 	Green(Heatmap main) {
 		super(main);
@@ -18,10 +18,13 @@ public class Green extends State {
 	@Override
 	public void checkForNextState() {
 		if(main.getAufwand() >= grenzwert)
-			main.setCurrentState(main.getYellow());		
+		{
+			main.setCurrentState(main.getYellow());
+		}
+					
 	}
 	
-	public void setGrenzwert(int grenzwert) {
+	public void setGrenzwert(double grenzwert) {
 		this.grenzwert = grenzwert;
 	}
 	
