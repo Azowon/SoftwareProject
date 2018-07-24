@@ -92,7 +92,7 @@ public class StatementCreator {
 	{
 		try 
 		{
-			StatementExecutor.executeUpdate("INSERT INTO users_in_task VALUES("+taskId+"."+userId+")","Regular");		
+			StatementExecutor.executeUpdate("INSERT INTO users_in_task VALUES("+taskId+","+userId+")","Regular");		
 		} 
 		catch (SQLException e) 
 		{
