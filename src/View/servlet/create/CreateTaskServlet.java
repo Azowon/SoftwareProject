@@ -59,7 +59,6 @@ public class CreateTaskServlet extends HttpServlet {
 		if(wpId<1|userId<1)
 			return false;
 		
-		//TODO fix
 		if(taskId<1)
 		{
 			return sh.createTask(name, description, deadline,timeBooked, time,status, wpId, userId);

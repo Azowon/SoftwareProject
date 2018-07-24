@@ -129,6 +129,12 @@ public class ServletHelper {
 			java.sql.Date sqlDate=new java.sql.Date(parsedDate.getTime());
 			Task t=new Task(-1, name, description, sqlDate,status,timeBooked,timePlanned,workpackageId,userId );
 			st.insertTask(t);
+			
+			Task insertedTask=st.selectTaskWhere("name='"+name+"'").get(0);
+			
+			long taskId=insertedTask.getId();
+			
+			st.insertUsersInTask(taskId, userId);
 			return true;
 		}
 		catch(Exception e)
@@ -236,7 +242,7 @@ public class ServletHelper {
 		
 		for(Task t : tasks)
 		{
-			mto.addTask(t.getStatus(), t.getName());
+			mto.addTask(t.getStatus(), t.getName(),t.getId());
 		}			
 		return mto;
 	}

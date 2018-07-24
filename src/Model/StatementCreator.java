@@ -84,6 +84,23 @@ public class StatementCreator {
 	}
 	
 	/**
+	 * Inserts task into user list
+	 * @param taskId Task
+	 * @param userId User
+	 */
+	public void insertUsersInTask(long taskId, long userId)
+	{
+		try 
+		{
+			StatementExecutor.executeUpdate("INSERT INTO users_in_task VALUES("+taskId+"."+userId+")","Regular");		
+		} 
+		catch (SQLException e) 
+		{
+			Logger.log(e.getMessage());
+		}
+	}
+	
+	/**
 	 * Selects all users using where condition
 	 * @param condition where condition
 	 * @return List of selected users
@@ -450,20 +467,20 @@ public class StatementCreator {
 		List<Task> tasks=new ArrayList<Task>();
 		try 
 		{
-			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM users in_task, task WHERE users_in_task.task_id=task.task_id AND users_in_task.user_id="+userId,"Regular");
+			ResultSet res=StatementExecutor.executeQuery("SELECT * FROM users_in_task, task WHERE users_in_task.task_id=task.task_id AND users_in_task.user_id="+userId,"Regular");
 	
 			while(res.next())
 			{
 				tasks.add(new Task(
-						res.getLong("task.task_id"),
-						res.getString("task.name"),
-						res.getString("task.description"),
-						res.getDate("task.deadline"),
-						res.getString("task.status"),
-						res.getDouble("task.time_booked"),
-						res.getDouble("task.time_planned"),
-						res.getLong("task.workpackage_id"),
-						res.getLong("task.assigned_user_id")
+						res.getLong("task_id"),
+						res.getString("name"),
+						res.getString("description"),
+						res.getDate("deadline"),
+						res.getString("status"),
+						res.getDouble("time_booked"),
+						res.getDouble("time_planned"),
+						res.getLong("workpackage_id"),
+						res.getLong("assigned_user_id")
 						));
 			}
 		} 

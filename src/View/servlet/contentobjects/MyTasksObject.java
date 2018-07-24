@@ -15,12 +15,12 @@ public class MyTasksObject {
 		return myTasks;
 	}
 	
-	public void addTask(String status, String taskName) {
+	public void addTask(String status, String taskName, long taskId) {
 		String taskStart = "<tr>";
 		String taskEnd = "</tr>";
 		
 		String s = "<td>" + status + "</td>";
-		String t = "<td>" + taskName + "</td>";
+		String t = "<td>" + "<a href='/SoftwareProject/TaskServlet?id="+taskId+"'>" +taskName + "</a></td>";
 		
 		myTasks += taskStart + s + t + taskEnd;
 	}
